@@ -16,7 +16,7 @@ public class WorkspaceAdminRepo implements IWorkspaceAdminRepository {
     public boolean save(WorkspaceAdmin admin) {
         String sql = "INSERT INTO workspace_admins (username, password_hash, email) VALUES (?, ?, ?)";
 
-        try (Connection conn = DBConnection.getInstance().getConnection();
+        try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, admin.getUsername());
@@ -35,7 +35,7 @@ public class WorkspaceAdminRepo implements IWorkspaceAdminRepository {
     public Optional<WorkspaceAdmin> findByEmail(String email) {
         String sql = "SELECT * FROM workspace_admins WHERE email = ?";
 
-        try (Connection conn = DBConnection.getInstance().getConnection();
+        try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, email);

@@ -1,6 +1,7 @@
 package com.bikrantj.controllers;
 
-
+import com.bikrantj.dtos.LoginRequest;
+import com.bikrantj.dtos.RegisterRequest;
 import com.bikrantj.models.WorkspaceAdmin;
 import com.bikrantj.services.WorkspaceAdminService;
 import io.javalin.http.Context;
@@ -18,17 +19,36 @@ public class AuthController {
 
     public void register(Context ctx) {
         try {
-            Map<String, String> body = ctx.bodyAsClass(Map.class);
-            String username = body.get("username");
-            String password = body.get("password");
-            String email = body.get("email");
-
-            if (username == null || password == null || email == null) {
-                ctx.status(400).json(Map.of("error", "Username, password and email are required"));
+            // Check if body is empty
+            String bodyString = ctx.body();
+            if (bodyString.trim().isEmpty()) {
+                ctx.status(400).json(Map.of("error", "Request body is required"));
                 return;
             }
 
-            boolean success = adminService.register(username, password, email);
+            RegisterRequest request = ctx.bodyAsClass(RegisterRequest.class);
+
+            // Validate required fields
+            if (request.getUsername().trim().isEmpty()) {
+                ctx.status(400).json(Map.of("error", "Username is required"));
+                return;
+            }
+
+            if (request.getPassword().trim().isEmpty()) {
+                ctx.status(400).json(Map.of("error", "Password is required"));
+                return;
+            }
+
+            if (request.getEmail().trim().isEmpty()) {
+                ctx.status(400).json(Map.of("error", "Email is required"));
+                return;
+            }
+
+            boolean success = adminService.register(
+                    request.getUsername().trim(),
+                    request.getPassword(),
+                    request.getEmail().trim()
+            );
 
             if (success) {
                 ctx.status(201).json(Map.of("message", "Admin registered successfully"));
@@ -37,28 +57,43 @@ public class AuthController {
             }
 
         } catch (Exception e) {
-            ctx.status(500).json(Map.of("error", "Registration failed"));
+            e.printStackTrace();
+            ctx.status(500).json(Map.of("error", "Registration failed: " + e.getMessage()));
         }
     }
 
     public void login(Context ctx) {
         try {
-            Map<String, String> body = ctx.bodyAsClass(Map.class);
-            String email = body.get("email");
-            String password = body.get("password");
-
-            if (email == null || password == null) {
-                ctx.status(400).json(Map.of("error", "Email and password are required"));
+            // Check if body is empty
+            String bodyString = ctx.body();
+            if (bodyString.trim().isEmpty()) {
+                ctx.status(400).json(Map.of("error", "Request body is required"));
                 return;
             }
 
-            Optional<WorkspaceAdmin> adminOpt = adminService.login(email, password);
+            LoginRequest request = ctx.bodyAsClass(LoginRequest.class);
+
+            // Validate required fields
+            if (request.getEmail().trim().isEmpty()) {
+                ctx.status(400).json(Map.of("error", "Email is required"));
+                return;
+            }
+
+            if (request.getPassword().trim().isEmpty()) {
+                ctx.status(400).json(Map.of("error", "Password is required"));
+                return;
+            }
+
+            Optional<WorkspaceAdmin> adminOpt = adminService.login(
+                    request.getEmail().trim(),
+                    request.getPassword()
+            );
 
             if (adminOpt.isPresent()) {
                 WorkspaceAdmin admin = adminOpt.get();
                 Map<String, Object> response = new HashMap<>();
                 response.put("message", "Login successful");
-                response.put("admin", Map.of(
+                response.put("data", Map.of(
                         "id", admin.getId(),
                         "username", admin.getUsername(),
                         "email", admin.getEmail()
@@ -69,7 +104,8 @@ public class AuthController {
             }
 
         } catch (Exception e) {
-            ctx.status(500).json(Map.of("error", "Login failed"));
+            e.printStackTrace();
+            ctx.status(500).json(Map.of("error", "Login failed: " + e.getMessage()));
         }
     }
 }
