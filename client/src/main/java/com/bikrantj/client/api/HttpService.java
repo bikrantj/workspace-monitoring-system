@@ -1,5 +1,6 @@
 package com.bikrantj.client.api; // Change to your package
 
+import com.bikrantj.client.auth.TokenManager;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -55,24 +56,28 @@ public class HttpService {
     // ========================== PRIVATE HELPERS ==========================
 
     private HttpRequest buildGetRequest(String endpoint) {
-        return HttpRequest.newBuilder()
+        var builder = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + endpoint))
                 .timeout(Duration.ofSeconds(30))
                 .header("Accept", "application/json")
-                .GET()
-                .build();
+                .GET();
+
+
+        addAuthHeader(builder);
+        return builder.build();
     }
 
     private HttpRequest buildPostRequest(String endpoint, Object body) throws ApiException {
         try {
             String json = mapper.writeValueAsString(body);
-            return HttpRequest.newBuilder()
+            var builder = HttpRequest.newBuilder()
                     .uri(URI.create(baseUrl + endpoint))
                     .timeout(Duration.ofSeconds(30))
                     .header("Content-Type", "application/json")
                     .header("Accept", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(json))
-                    .build();
+                    .POST(HttpRequest.BodyPublishers.ofString(json));
+            addAuthHeader(builder);
+            return builder.build();
         } catch (Exception e) {
             throw new ApiException("Failed to serialize request body", e);
         }
@@ -109,6 +114,13 @@ public class HttpService {
             throw new ApiException("Request interrupted", e);
         } catch (Exception e) {
             throw new ApiException("Request failed: " + e.getMessage(), e);
+        }
+    }
+
+    private void addAuthHeader(HttpRequest.Builder builder) {
+        String token = TokenManager.getToken();
+        if (token != null && !token.isBlank()) {
+            builder.header("Authorization", "Bearer " + token);
         }
     }
 }

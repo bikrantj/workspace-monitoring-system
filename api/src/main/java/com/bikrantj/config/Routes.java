@@ -17,6 +17,7 @@ public class Routes {
         // Auth routes
         app.post("/auth/register", authController::register);
         app.post("/auth/login", authController::login);
+        app.get("/auth/me", authController::getCurrentAdmin);
 
         // Health check
         app.get("/health", ctx -> ctx.json(Map.of("status", "healthy")));

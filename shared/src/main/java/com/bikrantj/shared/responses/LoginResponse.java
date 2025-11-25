@@ -1,4 +1,9 @@
 package com.bikrantj.shared.responses;
 
-public class LoginResponse {
+import com.bikrantj.shared.dto.User;
+
+public record LoginResponse(
+        String token,
+        User user
+) {
 }

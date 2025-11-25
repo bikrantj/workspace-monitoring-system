@@ -2,110 +2,97 @@ package com.bikrantj.controllers;
 
 import com.bikrantj.models.WorkspaceAdmin;
 import com.bikrantj.services.WorkspaceAdminService;
+import com.bikrantj.shared.dto.User;
 import com.bikrantj.shared.requests.LoginRequest;
 import com.bikrantj.shared.requests.RegisterRequest;
 import io.javalin.http.Context;
+import io.javalin.http.HttpStatus;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 public class AuthController {
+
     private final WorkspaceAdminService adminService;
 
     public AuthController(WorkspaceAdminService adminService) {
         this.adminService = adminService;
     }
 
+
+    // REGISTER
+
     public void register(Context ctx) {
-        try {
-            // Check if body is empty
-            String bodyString = ctx.body();
-            if (bodyString.trim().isEmpty()) {
-                ctx.status(400).json(Map.of("error", "Request body is required"));
-                return;
-            }
+        RegisterRequest req = ctx.bodyValidator(RegisterRequest.class)
+                .check(r -> r.getUsername() != null && !r.getUsername().trim().isEmpty(), "Username is required")
+                .check(r -> r.getPassword() != null && !r.getPassword().trim().isEmpty(), "Password is required")
+                .check(r -> r.getEmail() != null && !r.getEmail().trim().isEmpty(), "Email is required")
+                .get();
 
-            RegisterRequest request = ctx.bodyAsClass(RegisterRequest.class);
+        boolean success = adminService.register(
+                req.getUsername().trim(),
+                req.getPassword(),
+                req.getEmail().trim()
+        );
 
-            // Validate required fields
-            if (request.getUsername().trim().isEmpty()) {
-                ctx.status(400).json(Map.of("error", "Username is required"));
-                return;
-            }
-
-            if (request.getPassword().trim().isEmpty()) {
-                ctx.status(400).json(Map.of("error", "Password is required"));
-                return;
-            }
-
-            if (request.getEmail().trim().isEmpty()) {
-                ctx.status(400).json(Map.of("error", "Email is required"));
-                return;
-            }
-
-            boolean success = adminService.register(
-                    request.getUsername().trim(),
-                    request.getPassword(),
-                    request.getEmail().trim()
-            );
-
-            if (success) {
-                ctx.status(201).json(Map.of("message", "Admin registered successfully"));
-            } else {
-                ctx.status(400).json(Map.of("error", "Email already exists"));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            ctx.status(500).json(Map.of("error", "Registration failed: " + e.getMessage()));
+        if (success) {
+            ctx.status(HttpStatus.CREATED)
+                    .json(Map.of("message", "Admin registered successfully"));
+        } else {
+            ctx.status(HttpStatus.BAD_REQUEST)
+                    .json(Map.of("error", "Email already exists"));
         }
     }
 
+
+    // LOGIN – now returns JWT token!
+
     public void login(Context ctx) {
-        try {
-            // Check if body is empty
-            String bodyString = ctx.body();
-            if (bodyString.trim().isEmpty()) {
-                ctx.status(400).json(Map.of("error", "Request body is required"));
-                return;
-            }
+        LoginRequest req = ctx.bodyValidator(LoginRequest.class)
+                .check(r -> r.getEmail() != null && !r.getEmail().trim().isEmpty(), "Email is required")
+                .check(r -> r.getPassword() != null && !r.getPassword().trim().isEmpty(), "Password is required")
+                .get();
 
-            LoginRequest request = ctx.bodyAsClass(LoginRequest.class);
+        var result = adminService.login(req.getEmail().trim(), req.getPassword());
 
-            // Validate required fields
-            if (request.getEmail().trim().isEmpty()) {
-                ctx.status(400).json(Map.of("error", "Email is required"));
-                return;
-            }
+        if (result.isEmpty()) {
+            ctx.status(HttpStatus.UNAUTHORIZED)
+                    .json(Map.of("error", "Invalid email or password"));
+            return;
+        }
 
-            if (request.getPassword().trim().isEmpty()) {
-                ctx.status(400).json(Map.of("error", "Password is required"));
-                return;
-            }
+        WorkspaceAdminService.LoginResult login = result.get();
+        WorkspaceAdmin admin = login.admin();
 
-            Optional<WorkspaceAdmin> adminOpt = adminService.login(
-                    request.getEmail().trim(),
-                    request.getPassword()
-            );
-
-            if (adminOpt.isPresent()) {
-                WorkspaceAdmin admin = adminOpt.get();
-                Map<String, Object> response = new HashMap<>();
-                response.put("message", "Login successful");
-                response.put("data", Map.of(
+        // This is what your JavaFX client needs!
+        Map<String, Object> response = Map.of(
+                "token", login.token(),
+                "user", Map.of(
                         "id", admin.getId(),
                         "username", admin.getUsername(),
                         "email", admin.getEmail()
-                ));
-                ctx.json(response);
-            } else {
-                ctx.status(401).json(Map.of("error", "Invalid email or password"));
-            }
+                )
+        );
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            ctx.status(500).json(Map.of("error", "Login failed: " + e.getMessage()));
-        }
+        ctx.status(HttpStatus.OK).json(response);
     }
+
+    public void getCurrentAdmin(Context context) {
+        String authHeader = context.header("Authorization");
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            context.status(HttpStatus.UNAUTHORIZED).json(Map.of("error", "Unauthorized"));
+            return;
+        }
+        String token = authHeader.substring(7);
+
+        Optional<WorkspaceAdmin> adminOpt = adminService.validateToken(token);
+        if (adminOpt.isEmpty()) {
+            context.status(HttpStatus.UNAUTHORIZED).json(Map.of("error", "Invalid or expired token"));
+            return;
+        }
+
+        WorkspaceAdmin admin = adminOpt.get();
+        context.json(new User(admin.getId(), admin.getUsername(), admin.getEmail()));
+    }
+
 }

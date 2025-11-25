@@ -53,4 +53,5 @@ public class AdminRegisterController {
     public void onBackToHomeClicked(MouseEvent mouseEvent) {
         NavigationManager.navigateTo(Screens.INITIAL_VIEW);
     }
+    
 }

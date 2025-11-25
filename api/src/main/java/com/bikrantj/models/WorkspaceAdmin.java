@@ -5,6 +5,7 @@ public class WorkspaceAdmin {
     private String username;
     private String passwordHash;
     private String email;
+    private String salt;
 
     // Constructors
     public WorkspaceAdmin() {
@@ -23,6 +24,14 @@ public class WorkspaceAdmin {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getUsername() {

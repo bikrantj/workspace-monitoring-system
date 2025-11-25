@@ -14,7 +14,7 @@ public class WorkspaceAdminRepo implements IWorkspaceAdminRepository {
 
     @Override
     public boolean save(WorkspaceAdmin admin) {
-        String sql = "INSERT INTO workspace_admins (username, password_hash, email) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO workspace_admins (username, password_hash, email, salt) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -22,6 +22,7 @@ public class WorkspaceAdminRepo implements IWorkspaceAdminRepository {
             stmt.setString(1, admin.getUsername());
             stmt.setString(2, admin.getPasswordHash());
             stmt.setString(3, admin.getEmail());
+            stmt.setString(4, admin.getSalt());
 
             return stmt.executeUpdate() > 0;
 
@@ -47,6 +48,7 @@ public class WorkspaceAdminRepo implements IWorkspaceAdminRepository {
                 admin.setUsername(rs.getString("username"));
                 admin.setPasswordHash(rs.getString("password_hash"));
                 admin.setEmail(rs.getString("email"));
+                admin.setSalt(rs.getString("salt"));
                 return Optional.of(admin);
             }
 

@@ -5,13 +5,14 @@ USE workspace_monitor;
 -- Table: workspace_admins (users who create and manage workspaces)
 CREATE TABLE IF NOT EXISTS workspace_admins
 (
-    id            VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
+    id            VARCHAR(36) PRIMARY KEY      DEFAULT (UUID()),
     username      VARCHAR(50)         NOT NULL,
     password_hash VARCHAR(255)        NOT NULL,
+    salt          VARCHAR(32)         NOT NULL DEFAULT '',
     email         VARCHAR(100) UNIQUE NOT NULL,
-    created_at    TIMESTAMP               DEFAULT CURRENT_TIMESTAMP,
+    created_at    TIMESTAMP                    DEFAULT CURRENT_TIMESTAMP,
     last_login    TIMESTAMP           NULL,
-    is_active     BOOLEAN                 DEFAULT TRUE
+    is_active     BOOLEAN                      DEFAULT TRUE
 );
 
 -- Table: workspaces (created by workspace admins)
