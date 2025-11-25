@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:id="rootPane"
+            xmlns="http://javafx.com/javafx/21"
+            fx:controller="com.bikrantj.client.controllers.AdminLoginController"
+            prefHeight="480.0" prefWidth="420.0"
+            style="-fx-background-color: #f8f9fc;">
+
+    <!-- Perfect centering using StackPane -->
+    <StackPane AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+               AnchorPane.rightAnchor="0">
+
+        <VBox alignment="CENTER" spacing="30">
+
+            <!-- White Card with shadow -->
+            <VBox style="-fx-background-color: white;
+                         -fx-background-radius: 16;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 20, 0, 0, 5);
+                         -fx-border-color: #e0e6ed;
+                         -fx-border-radius: 16;
+                         -fx-border-width: 1;"
+                  maxWidth="380" prefWidth="380"
+                  alignment="CENTER"
+                  spacing="28">
+
+                <padding>
+                    <Insets top="45" right="40" bottom="45" left="40"/>
+                </padding>
+
+                <!-- Title -->
+                <Label text="Admin Login"
+                       style="-fx-text-fill: #2d3748;
+                              -fx-font-size: 28;
+                              -fx-font-weight: bold;"/>
+
+                <Label text="Sign in to access the administration panel"
+                       style="-fx-text-fill: #718096;
+                              -fx-font-size: 14;"/>
+
+                <!-- Email Field -->
+                <TextField fx:id="email"
+                           promptText="Email address"
+                           prefHeight="48"
+                           style="-fx-background-color: #f7fafc;
+                                  -fx-background-radius: 10;
+                                  -fx-border-color: #cbd5e0;
+                                  -fx-border-radius: 10;
+                                  -fx-border-width: 1.5;
+                                  -fx-padding: 0 15 0 15;
+                                  -fx-font-size: 14;"/>
+
+                <!-- Password Field -->
+                <PasswordField fx:id="password"
+                               promptText="Password"
+                               prefHeight="48"
+                               style="-fx-background-color: #f7fafc;
+                                      -fx-background-radius: 10;
+                                      -fx-border-color: #cbd5e0;
+                                      -fx-border-radius: 10;
+                                      -fx-border-width: 1.5;
+                                      -fx-padding: 0 15 0 15;
+                                      -fx-font-size: 14;"/>
+
+                <!-- Login Button -->
+                <Button onAction="#onLoginButtonClicked"
+                        text="Login as Admin"
+                        prefWidth="300" prefHeight="50"
+                        style="-fx-background-color: #4c51bf;
+                               -fx-background-radius: 10;
+                               -fx-text-fill: white;
+                               -fx-font-size: 16;
+                               -fx-font-weight: bold;
+                               -fx-cursor: hand;">
+                    <font>
+                        <Font name="System Bold" size="16"/>
+                    </font>
+                </Button>
+
+                <!-- Register Button -->
+                <Button onAction="#onRegisterButtonClicked"
+                        text="Register new account"
+                        prefWidth="300" prefHeight="50"
+                        style="-fx-background-color: transparent;
+                               -fx-border-color: #4c51bf;
+                               -fx-border-radius: 10;
+                               -fx-border-width: 2;
+                               -fx-text-fill: #4c51bf;
+                               -fx-font-size: 16;
+                               -fx-font-weight: bold;
+                               -fx-cursor: hand;">
+                    <font>
+                        <Font name="System Bold" size="16"/>
+                    </font>
+                </Button>
+
+                <Label text="Back to home"
+                       onMouseClicked="#onBackToHomeClicked"
+                       style="-fx-text-fill: #4c51bf;
+              -fx-font-size: 14;
+              -fx-underline: true;
+              -fx-cursor: hand;
+              -fx-padding: 15 0 0 0;"
+                       alignment="CENTER"/>
+
+            </VBox>
+        </VBox>
+    </StackPane>
+</AnchorPane>

@@ -1,9 +1,9 @@
 package com.bikrantj.controllers;
 
-import com.bikrantj.dtos.LoginRequest;
-import com.bikrantj.dtos.RegisterRequest;
 import com.bikrantj.models.WorkspaceAdmin;
 import com.bikrantj.services.WorkspaceAdminService;
+import com.bikrantj.shared.requests.LoginRequest;
+import com.bikrantj.shared.requests.RegisterRequest;
 import io.javalin.http.Context;
 
 import java.util.HashMap;

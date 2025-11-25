@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/21"
+      fx:controller="com.bikrantj.client.controllers.InitialViewController"
+      alignment="CENTER"
+      spacing="30.0"
+      prefHeight="500.0"
+      prefWidth="440.0"
+      style="-fx-background-color: #f8f9fc;">
+
+    <padding>
+        <Insets top="60" right="50" bottom="60" left="50"/>
+    </padding>
+
+    <!-- Centered White Card – fixed width like the admin login -->
+    <VBox style="-fx-background-color: white;
+                 -fx-background-radius: 16;
+                 -fx-border-color: #e0e6ed;
+                 -fx-border-radius: 16;
+                 -fx-border-width: 1.5;"
+          spacing="40"
+          alignment="CENTER"
+          prefWidth="380"
+          maxWidth="380"
+          VBox.vgrow="NEVER">
+
+        <padding>
+            <Insets top="60" right="50" bottom="60" left="50"/>
+        </padding>
+
+        <!-- Welcome Title -->
+        <Label text="Welcome!"
+               style="-fx-text-fill: #2d3748;
+                      -fx-font-size: 32;
+                      -fx-font-weight: bold;"/>
+
+        <Label fx:id="welcomeText"
+               text="Please choose your login type"
+               style="-fx-text-fill: #718096;
+                      -fx-font-size: 15;"
+               alignment="CENTER"/>
+
+        <!-- Buttons -->
+        <Button text="Login as Client"
+                onAction="#onHelloButtonClick"
+                prefWidth="300"
+                prefHeight="52"
+                style="-fx-background-color: #4c51bf;
+                       -fx-background-radius: 10;
+                       -fx-text-fill: white;
+                       -fx-font-size: 16;
+                       -fx-font-weight: bold;">
+            <font>
+                <Font name="System Bold" size="16"/>
+            </font>
+        </Button>
+
+        <Button text="Login as Admin"
+                onAction="#onAdminButtonClick"
+                prefWidth="300"
+                prefHeight="52"
+                style="-fx-background-color: #4c51bf;
+                       -fx-background-radius: 10;
+                       -fx-text-fill: white;
+                       -fx-font-size: 16;
+                       -fx-font-weight: bold;">
+            <font>
+                <Font name="System Bold" size="16"/>
+            </font>
+        </Button>
+
+        <!-- Subtle footer -->
+        <Label text="© 2025 Your Company • Secure Access Portal"
+               style="-fx-text-fill: #a0aec0;
+                      -fx-font-size: 12;"/>
+    </VBox>
+</VBox>

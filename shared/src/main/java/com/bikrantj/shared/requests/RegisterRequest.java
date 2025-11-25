@@ -1,4 +1,4 @@
-package com.bikrantj.dtos;
+package com.bikrantj.shared.requests;
 
 public class RegisterRequest {
     private String username;
@@ -7,6 +7,12 @@ public class RegisterRequest {
 
     // Default constructor
     public RegisterRequest() {
+    }
+
+    public RegisterRequest(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
     }
 
     // Getters and setters

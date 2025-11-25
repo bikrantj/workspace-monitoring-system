@@ -1,4 +1,4 @@
-package com.bikrantj.dtos;
+package com.bikrantj.shared.requests;
 
 public class LoginRequest {
     private String email;

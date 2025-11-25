@@ -21,6 +21,7 @@ public class WorkspaceAdminService {
         String passwordHash = String.valueOf(password.hashCode());
 
         WorkspaceAdmin admin = new WorkspaceAdmin(username, passwordHash, email);
+        System.out.println("Registering admin: " + admin.getUsername() + ", " + admin.getEmail());
         return adminRepository.save(admin);
     }
 
