@@ -14,23 +14,22 @@ public class ClientService {
     }
 
 
-    public boolean register(Client client) {
+    public Client register(Client c) {
 //        We don't need to check if client is already registered here, because the controller will handle that.
-        Workspace workspace = workspaceService.validateWorkspace(client.getWorkspaceId());
+        Workspace workspace = workspaceService.validateWorkspace(c.getWorkspaceId());
 
         if (workspace == null) {
-            System.out.println("Registering Client. Invalid workspace ID: " + client.getWorkspaceId());
-            return false;
+            System.out.println("Registering Client. Invalid workspace ID: " + c.getWorkspaceId());
+            return null;
         }
 
         // change client's workspaceId to db workspace->id
-        client.setWorkspaceId(workspace.getId());
+        c.setWorkspaceId(workspace.getId());
         System.out.println("Creating client in workspace: " + workspace.getName() + " (" + workspace.getId() + ")");
-        clientRepo.create(client);
-//
+        //
 //        Check if the workspace is valid before registering the client
         // Registration logic here
-        return true;
+        return clientRepo.create(c);
     }
 
     public Client isClientInWorkspace(String clientIdentifier, String workspaceId) {

@@ -3,10 +3,7 @@ package com.bikrantj.client.api;
 import com.bikrantj.shared.dto.User;
 import com.bikrantj.shared.model.Client;
 import com.bikrantj.shared.model.Workspace;
-import com.bikrantj.shared.requests.CreateClientRequest;
-import com.bikrantj.shared.requests.CreateWorkspaceRequest;
-import com.bikrantj.shared.requests.LoginRequest;
-import com.bikrantj.shared.requests.RegisterRequest;
+import com.bikrantj.shared.requests.*;
 import com.bikrantj.shared.responses.LoginResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 
@@ -42,5 +39,9 @@ public class ApiClient {
     public List<Workspace> getWorkspace() throws ApiException {
         return http.getGeneric("/workspace", new TypeReference<List<Workspace>>() {
         });
+    }
+
+    public void sendMonitoringSnapshot(MonitoringPayload payload) throws ApiException {
+        http.post("/monitoring/ingest", payload, Void.class);
     }
 }

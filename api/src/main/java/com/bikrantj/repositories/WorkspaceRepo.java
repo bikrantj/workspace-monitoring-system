@@ -88,7 +88,7 @@ public class WorkspaceRepo {
     public Workspace findById(String workspaceId) {
 
         String sql = """
-                    SELECT id, name, description, admin_id, is_active, created_at
+                    SELECT id, name, description, admin_id, is_active, uniqueId, created_at
                     FROM workspaces
                     WHERE uniqueId = ? AND is_active = TRUE
                 """;
@@ -104,6 +104,7 @@ public class WorkspaceRepo {
 
                 Workspace workspace = new Workspace();
                 workspace.setId(rs.getString("id"));
+                workspace.setUniqueId(rs.getString("uniqueId"));
                 workspace.setName(rs.getString("name"));
                 workspace.setDescription(rs.getString("description"));
                 workspace.setAdminId(rs.getString("admin_id"));

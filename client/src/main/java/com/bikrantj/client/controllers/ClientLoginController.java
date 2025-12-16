@@ -4,6 +4,7 @@ import com.bikrantj.client.AppContext;
 import com.bikrantj.client.api.ApiException;
 import com.bikrantj.client.auth.ClientPersistence;
 import com.bikrantj.client.auth.ClientSession;
+import com.bikrantj.client.clientruntime.runtime.ClientRuntime;
 import com.bikrantj.client.navigation.NavigationManager;
 import com.bikrantj.client.navigation.Screens;
 import com.bikrantj.client.ui.Toast;
@@ -62,6 +63,9 @@ public class ClientLoginController implements Initializable {
             ClientSession.set(client);
             ClientPersistence.save(client);
 
+            System.out.println("Before starting ClientRuntime" + client.getId());
+
+            ClientRuntime.start();
             NavigationManager.navigateTo(Screens.CLIENT_DASHBOARD);
 
 //            TODO: Store client info in a file and ClientSession and try to auto-login next time

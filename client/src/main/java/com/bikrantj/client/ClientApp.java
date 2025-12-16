@@ -5,6 +5,7 @@ import com.bikrantj.client.auth.ClientPersistence;
 import com.bikrantj.client.auth.ClientSession;
 import com.bikrantj.client.auth.TokenManager;
 import com.bikrantj.client.auth.UserSession;
+import com.bikrantj.client.clientruntime.runtime.ClientRuntime;
 import com.bikrantj.client.navigation.NavigationManager;
 import com.bikrantj.client.navigation.Screens;
 import com.bikrantj.shared.dto.User;
@@ -95,8 +96,9 @@ public class ClientApp extends Application {
                     AppContext.getApiClient().clientLogin(request);
 
             ClientSession.set(loggedInClient);
-
             System.out.println("Restored client session for: " + loggedInClient.getClientName());
+            ClientRuntime.start();
+
             NavigationManager.navigateTo(Screens.CLIENT_DASHBOARD);
             return true;
 

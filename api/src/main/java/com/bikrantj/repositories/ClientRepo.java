@@ -14,7 +14,7 @@ public class ClientRepo {
         this.con = con;
     }
 
-    public boolean create(Client client) {
+    public Client create(Client client) {
 
         String sql = """
                     INSERT INTO clients (
@@ -44,7 +44,7 @@ public class ClientRepo {
 
             int affectedRows = ps.executeUpdate();
             System.out.println("Everything ok till here. Affected rows: " + affectedRows);
-            return affectedRows == 1;
+            return findByIdentifierAndWorkspace(client.getClientIdentifier(), client.getWorkspaceId());
 
         } catch (SQLException e) {
             System.out.println("Error SQL State: " + e.getSQLState());
@@ -52,11 +52,11 @@ public class ClientRepo {
             if (e.getSQLState() != null && e.getSQLState().startsWith("23")) {
                 System.out.println(e.getMessage());
                 System.err.println("Client already registered with this identifier.");
-                return false;
+                return null;
             }
 
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
@@ -67,11 +67,7 @@ public class ClientRepo {
 
         String sql = """
                 SELECT
-                    workspace_id,
-                    client_name,
-                    client_identifier,
-                    os_info,
-                    last_ip_address
+                    *
                 FROM clients
                 WHERE client_identifier = ? AND workspace_id = ?
                 """;
@@ -86,6 +82,7 @@ public class ClientRepo {
 
                     );
                     client.setWorkspaceId(rs.getString("workspace_id"));
+                    client.setId(rs.getString("id"));
                     client.setClientName(
                             rs.getString("client_name"));
                     client.setClientIdentifier(

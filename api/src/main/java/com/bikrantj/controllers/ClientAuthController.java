@@ -41,10 +41,12 @@ public class ClientAuthController {
             // Client already registered -> Login successful
             ctx.status(HttpStatus.OK).json(client);
         } else {
-            boolean success = clientService.register(_client);
-            if (success) {
+            Client dbClient = clientService.register(_client);
+            if (dbClient != null) {
+                System.out.println("Returning db Client with id : " + dbClient.getId());
+                System.out.println("Returning db Client with id : " + dbClient.getClientName());
                 ctx.status(HttpStatus.CREATED)
-                        .json(_client);
+                        .json(dbClient);
             } else {
                 System.out.println("NOt success in client registration");
                 ctx.status(HttpStatus.BAD_REQUEST)

@@ -51,7 +51,16 @@ CREATE TABLE IF NOT EXISTS clients
     INDEX idx_client_status (status),
     INDEX idx_client_heartbeat (last_heartbeat)
 );
+CREATE TABLE monitoring_snapshots
+(
+    id           VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
+    client_id    VARCHAR(36) NOT NULL,
+    workspace_id VARCHAR(36) NOT NULL,
+    collected_at TIMESTAMP               DEFAULT CURRENT_TIMESTAMP,
 
+    FOREIGN KEY (client_id) REFERENCES clients (id) ON DELETE CASCADE,
+    FOREIGN KEY (workspace_id) REFERENCES workspaces (id) ON DELETE CASCADE
+);
 -- Table: screenshots (store screenshot metadata)
 CREATE TABLE IF NOT EXISTS screenshots
 (
@@ -61,6 +70,9 @@ CREATE TABLE IF NOT EXISTS screenshots
     file_path    VARCHAR(500) NOT NULL, -- Path where screenshot is stored on server
     file_size    BIGINT,
     capture_time TIMESTAMP               DEFAULT CURRENT_TIMESTAMP,
+    snapshot_id  VARCHAR(36)  NOT NULL UNIQUE,
+
+    FOREIGN KEY (snapshot_id) REFERENCES monitoring_snapshots (id) ON DELETE CASCADE,
 
     FOREIGN KEY (client_id) REFERENCES clients (id) ON DELETE CASCADE,
     FOREIGN KEY (workspace_id) REFERENCES workspaces (id) ON DELETE CASCADE,
@@ -68,18 +80,23 @@ CREATE TABLE IF NOT EXISTS screenshots
     INDEX idx_screenshot_time (capture_time)
 );
 
+
 -- Table: processes (store running processes from clients)
 CREATE TABLE IF NOT EXISTS processes
 (
     id           VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
     client_id    VARCHAR(36)  NOT NULL,
     workspace_id VARCHAR(36)  NOT NULL,
+    snapshot_id  VARCHAR(36)  NOT NULL,
+
     process_name VARCHAR(255) NOT NULL,
     process_id   INT,
     memory_usage BIGINT,
     cpu_usage    DECIMAL(5, 2),
     window_title TEXT,
     collected_at TIMESTAMP               DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (snapshot_id) REFERENCES monitoring_snapshots (id) ON DELETE CASCADE,
 
     FOREIGN KEY (client_id) REFERENCES clients (id) ON DELETE CASCADE,
     FOREIGN KEY (workspace_id) REFERENCES workspaces (id) ON DELETE CASCADE,

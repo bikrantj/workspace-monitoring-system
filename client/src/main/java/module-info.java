@@ -7,8 +7,10 @@ module com.bikrantj.client {
     requires com.bikrantj.shared;
     requires org.controlsfx.controls;
     requires javafx.graphics;
+    requires java.desktop;
+    requires com.github.oshi;
 
-    
+
     opens com.bikrantj.client to javafx.fxml;
     exports com.bikrantj.client;
     exports com.bikrantj.client.controllers;
