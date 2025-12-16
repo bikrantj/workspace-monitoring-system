@@ -2,6 +2,7 @@
 <project version="4">
   <component name="DataSourcePerFileMappings">
     <file url="file://$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/ClientRepo.java" value="c8fcc18b-650f-4e7e-b499-a90e11393ed4" />
+    <file url="file://$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/MetricsRepo.java" value="c8fcc18b-650f-4e7e-b499-a90e11393ed4" />
     <file url="file://$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/ProcessRepo.java" value="c8fcc18b-650f-4e7e-b499-a90e11393ed4" />
     <file url="file://$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/ScreenshotRepo.java" value="c8fcc18b-650f-4e7e-b499-a90e11393ed4" />
     <file url="file://$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/SnapshotRepo.java" value="c8fcc18b-650f-4e7e-b499-a90e11393ed4" />

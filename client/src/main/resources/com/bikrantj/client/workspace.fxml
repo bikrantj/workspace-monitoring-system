@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
-            xmlns="http://javafx.com/javafx/21"
-            fx:controller="com.bikrantj.client.controllers.WorkspaceController"
-            style="-fx-background-color: #edf2f7;">
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/21"
+      fx:controller="com.bikrantj.client.controllers.WorkspaceController"
+      spacing="20"
+      style="-fx-background-color: #edf2f7;">
 
+    <padding>
+        <Insets top="30" right="40" bottom="40" left="40"/>
+    </padding>
+
+    <!-- Workspace title -->
     <Label fx:id="workspaceLabel"
-           layoutX="40"
-           layoutY="40"
-           style="-fx-font-size: 24; -fx-font-weight: bold;"
-           text="Workspace"/>
-</AnchorPane>
+           text="Workspace"
+           style="-fx-font-size: 24;
+                  -fx-font-weight: bold;"/>
+
+    <!-- Scrollable flex dashboard -->
+    <ScrollPane fitToWidth="true"
+                hbarPolicy="NEVER"
+                vbarPolicy="AS_NEEDED"
+                style="-fx-background-color: transparent;">
+
+        <FlowPane fx:id="graphContainer"
+                  hgap="20"
+                  vgap="20"
+                  prefWrapLength="900"
+        >
+
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+        </FlowPane>
+
+    </ScrollPane>
+
+</VBox>

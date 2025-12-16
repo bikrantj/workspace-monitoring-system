@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      xmlns="http://javafx.com/javafx/21"
+      fx:controller="com.bikrantj.client.controllers.GraphCardController"
+      spacing="10"
+      prefWidth="420"
+      style="-fx-background-color: white;
+             -fx-background-radius: 12;
+             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 4);">
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label fx:id="titleLabel"
+           text="Graph Title"
+           style="-fx-font-size: 16;
+                  -fx-font-weight: bold;"/>
+
+    <LineChart fx:id="chart"
+               prefHeight="250"
+               animated="false">
+        <xAxis>
+            <CategoryAxis fx:id="xAxis"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis fx:id="yAxis"/>
+        </yAxis>
+    </LineChart>
+
+</VBox>

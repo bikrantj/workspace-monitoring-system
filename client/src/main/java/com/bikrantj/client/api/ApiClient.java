@@ -5,6 +5,7 @@ import com.bikrantj.shared.model.Client;
 import com.bikrantj.shared.model.Workspace;
 import com.bikrantj.shared.requests.*;
 import com.bikrantj.shared.responses.LoginResponse;
+import com.bikrantj.shared.responses.WorkspaceActivityPoint;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -43,5 +44,14 @@ public class ApiClient {
 
     public void sendMonitoringSnapshot(MonitoringPayload payload) throws ApiException {
         http.post("/monitoring/ingest", payload, Void.class);
+    }
+
+    public List<WorkspaceActivityPoint> getWorkspaceActivity(String workspaceId) throws ApiException {
+        return http
+                .getGeneric(
+                        "/workspace/" + workspaceId + "/metrics/activity",
+                        new TypeReference<List<WorkspaceActivityPoint>>() {
+                        }
+                );
     }
 }

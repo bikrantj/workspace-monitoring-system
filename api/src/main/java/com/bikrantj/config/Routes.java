@@ -1,15 +1,9 @@
 package com.bikrantj.config;
 
-import com.bikrantj.controllers.AuthController;
-import com.bikrantj.controllers.ClientAuthController;
-import com.bikrantj.controllers.MonitoringController;
-import com.bikrantj.controllers.WorkspaceController;
+import com.bikrantj.controllers.*;
 import com.bikrantj.db.DBConnection;
 import com.bikrantj.repositories.*;
-import com.bikrantj.services.ClientService;
-import com.bikrantj.services.MonitoringService;
-import com.bikrantj.services.WorkspaceAdminService;
-import com.bikrantj.services.WorkspaceService;
+import com.bikrantj.services.*;
 import io.javalin.Javalin;
 
 import java.sql.Connection;
@@ -38,6 +32,10 @@ public class Routes {
         ProcessRepo processRepo = new ProcessRepo(con);
         MonitoringService monitoringService = new MonitoringService(snapshotRepo, screenshotRepo, processRepo);
         MonitoringController monitoringController = new MonitoringController(monitoringService, clientService);
+
+        MetricsRepo metricsRepo = new MetricsRepo(con);
+        MetricsService metricsService = new MetricsService(metricsRepo);
+        MetricsController metricsController = new MetricsController(metricsService);
         // Auth routes
         app.post("/auth/register", authController::register);
         app.post("/auth/login", authController::login);
@@ -52,7 +50,12 @@ public class Routes {
 // Client Monitoring:
         app.post("/monitoring/ingest", monitoringController::ingest);
 
+
+//        Metrics:
+        app.get("/workspace/{workspaceId}/metrics/activity", metricsController::getWorkspaceActivity);
         // Health check
         app.get("/health", ctx -> ctx.json(Map.of("status", "healthy")));
+
+
     }
 }
