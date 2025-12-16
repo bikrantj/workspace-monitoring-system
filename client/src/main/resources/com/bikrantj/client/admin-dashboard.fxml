@@ -97,6 +97,7 @@
                     </graphic>
                 </Button>
                 <Button text="Logout"
+                        onMouseClicked="#onLogoutClicked"
                         prefWidth="212" prefHeight="48"
                         style="-fx-background-color: transparent;
                            -fx-text-fill: #ef4444;

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/21"
+            fx:controller="com.bikrantj.client.controllers.WorkspaceController"
+            style="-fx-background-color: #edf2f7;">
+
+    <Label fx:id="workspaceLabel"
+           layoutX="40"
+           layoutY="40"
+           style="-fx-font-size: 24; -fx-font-weight: bold;"
+           text="Workspace"/>
+</AnchorPane>

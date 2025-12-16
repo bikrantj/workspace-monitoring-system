@@ -8,6 +8,8 @@ import com.bikrantj.client.navigation.Screens;
 import com.bikrantj.shared.dto.User;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -24,12 +26,17 @@ public class ClientApp extends Application {
 
         // Set up the primary stage
         primaryStage.setTitle("Project IV");
+        // Create an empty root container
+        StackPane appRoot = new StackPane();
+        Scene scene = new Scene(appRoot);
 
+        primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
+        primaryStage.show();
 
 
         // Initialize NavigationManager
-        NavigationManager.setPrimaryStage(primaryStage);
+        NavigationManager.initialize(appRoot);
         String savedToken = TokenManager.getToken();
         if (savedToken != null && !savedToken.isBlank()) {
             try {

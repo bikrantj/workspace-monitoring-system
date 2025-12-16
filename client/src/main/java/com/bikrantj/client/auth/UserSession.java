@@ -1,5 +1,7 @@
 package com.bikrantj.client.auth;
 
+import com.bikrantj.client.navigation.NavigationManager;
+import com.bikrantj.client.navigation.Screens;
 import com.bikrantj.shared.dto.User;
 
 public class UserSession {
@@ -28,5 +30,6 @@ public class UserSession {
         currentUser = null;
         token = null;
         TokenManager.clearToken();
+        NavigationManager.navigateTo(Screens.INITIAL_VIEW);
     }
 }

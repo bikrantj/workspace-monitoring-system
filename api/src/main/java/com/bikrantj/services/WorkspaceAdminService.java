@@ -2,7 +2,6 @@ package com.bikrantj.services;
 
 import com.bikrantj.repositories.WorkspaceAdminRepo;
 import com.bikrantj.shared.dto.User;
-import com.bikrantj.shared.model.Workspace;
 import com.bikrantj.shared.model.WorkspaceAdmin;
 import com.bikrantj.utils.PasswordUtil;
 import io.javalin.http.Context;
@@ -60,10 +59,6 @@ public class WorkspaceAdminService {
         return Optional.of(new LoginResult(token, admin));
     }
 
-
-    public boolean createWorkspace(Workspace workspace) {
-        return workspaceService.createWorkspace(workspace);
-    }
 
     public User getCurrentAdmin(Context context) {
         String authHeader = context.header("Authorization");

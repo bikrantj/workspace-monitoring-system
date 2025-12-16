@@ -9,8 +9,12 @@ public enum Screens {
 
     //    Admin views
     ADMIN_LOGIN("/com/bikrantj/client/admin-login.fxml"),
+    NEW_WORKSPACE("/com/bikrantj/client/admin-new-workspace.fxml"),
+
     ADMIN_REGISTER("/com/bikrantj/client/admin-register.fxml"),
-    DASHBOARD("/com/bikrantj/client/admin-dashboard.fxml");
+    DASHBOARD_CONTENT("/com/bikrantj/client/admin-dashboard-content.fxml"),
+    DASHBOARD("/com/bikrantj/client/admin-dashboard.fxml"),
+    WORKSPACE("/com/bikrantj/client/workspace.fxml");
 
     private final String fxmlPath;
 

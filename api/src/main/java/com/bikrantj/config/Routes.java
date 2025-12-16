@@ -1,8 +1,8 @@
 package com.bikrantj.config;
 
-import com.bikrantj.controllers.AdminController;
 import com.bikrantj.controllers.AuthController;
 import com.bikrantj.controllers.ClientAuthController;
+import com.bikrantj.controllers.WorkspaceController;
 import com.bikrantj.db.DBConnection;
 import com.bikrantj.repositories.ClientRepo;
 import com.bikrantj.repositories.WorkspaceAdminRepo;
@@ -30,7 +30,7 @@ public class Routes {
         ClientService clientService = new ClientService(workspaceService, clientRepo);
 
         AuthController authController = new AuthController(workspaceAdminService);
-        AdminController adminController = new AdminController(workspaceAdminService);
+        WorkspaceController workspaceController = new WorkspaceController(workspaceAdminService, workspaceService);
         ClientAuthController clientAuthController = new ClientAuthController(clientService);
 
         // Auth routes
@@ -42,7 +42,8 @@ public class Routes {
         app.post("/client/login", clientAuthController::login);
 
 //        Workspace routes
-        app.post("/workspace/create", adminController::createWorkspace);
+        app.post("/workspace/create", workspaceController::createWorkspace);
+        app.get("/workspace", workspaceController::getWorkspaces);
 
         // Health check
         app.get("/health", ctx -> ctx.json(Map.of("status", "healthy")));

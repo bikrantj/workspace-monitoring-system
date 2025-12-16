@@ -11,6 +11,7 @@ public class Workspace {
     private String adminId;
     private boolean active;
     private LocalDateTime createdAt;
+    private String uniqueId;
 
     public Workspace() {
     }
@@ -65,5 +66,13 @@ public class Workspace {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getUniqueId() {
+        return uniqueId;
+    }
+
+    public void setUniqueId(String uniqueId) {
+        this.uniqueId = uniqueId;
     }
 }

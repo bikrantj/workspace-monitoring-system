@@ -1,10 +1,14 @@
 package com.bikrantj.client.api;
 
 import com.bikrantj.shared.dto.User;
+import com.bikrantj.shared.model.Workspace;
 import com.bikrantj.shared.requests.CreateWorkspaceRequest;
 import com.bikrantj.shared.requests.LoginRequest;
 import com.bikrantj.shared.requests.RegisterRequest;
 import com.bikrantj.shared.responses.LoginResponse;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class ApiClient {
     private final HttpService http;
@@ -27,5 +31,10 @@ public class ApiClient {
 
     public void createWorkspace(CreateWorkspaceRequest request) throws ApiException {
         http.post("/workspace/create", request, Void.class);
+    }
+
+    public List<Workspace> getWorkspace() throws ApiException {
+        return http.getGeneric("/workspace", new TypeReference<List<Workspace>>() {
+        });
     }
 }

@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS workspaces
 (
     id          VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
     name        VARCHAR(100) UNIQUE NOT NULL,
+    uniqueId    VARCHAR(100) UNIQUE NOT NULL,                   -- Unique identifier for joining the workspace
     description TEXT,
     admin_id    VARCHAR(36)         NOT NULL,                   -- The admin who created this workspace
     created_at  TIMESTAMP               DEFAULT CURRENT_TIMESTAMP,

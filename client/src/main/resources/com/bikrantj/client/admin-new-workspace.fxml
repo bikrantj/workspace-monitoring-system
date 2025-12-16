@@ -38,10 +38,39 @@
                       -fx-font-weight: bold;"/>
 
                 <!-- Name Field -->
-                <TextField fx:id="nameField"
-                           promptText="Workspace Name"
-                           prefHeight="48"
-                           style="-fx-background-color: #f7fafc;
+                <VBox>
+                    <Label
+                            text="Unique Workspace ID"
+                            style="-fx-text-fill: #4a5568;
+                              -fx-font-size: 14;
+                              -fx-font-weight: bold;"
+                    />
+                    <TextField fx:id="workspaceIdField"
+                               promptText="Unique Workspace ID"
+                               prefHeight="48"
+                               editable="false"
+                               style="-fx-background-color: #f7fafc;
+                          -fx-background-radius: 10;
+                          -fx-border-color: #cbd5e0;
+                          -fx-border-radius: 10;
+                          -fx-border-width: 1.5;
+                          -fx-padding: 0 15 0 15;
+                          -fx-font-size: 14;"/>
+                </VBox>
+
+
+                <!-- Name Field -->
+                <VBox>
+                    <Label
+                            text="Unique Workspace Name"
+                            style="-fx-text-fill: #4a5568;
+                              -fx-font-size: 14;
+                              -fx-font-weight: bold;"
+                    />
+                    <TextField fx:id="nameField"
+                               promptText="Workspace Name"
+                               prefHeight="48"
+                               style="-fx-background-color: #f7fafc;
                           -fx-background-radius: 10;
                           -fx-border-color: #cbd5e0;
                           -fx-border-radius: 10;
@@ -49,17 +78,26 @@
                           -fx-padding: 0 15 0 15;
                           -fx-font-size: 14;"/>
 
-                <!-- Description Field -->
-                <TextArea fx:id="descriptionArea"
-                          promptText="Workspace Description"
-                          prefHeight="120"
-                          style="-fx-background-color: #f7fafc;
+                </VBox>
+                <VBox>
+
+                    <Label
+                            text="Workspace Description"
+                            style="-fx-text-fill: #4a5568;
+                              -fx-font-size: 14;
+                              -fx-font-weight: bold;"
+                    />
+                    <!-- Description Field -->
+                    <TextArea fx:id="descriptionArea"
+                              promptText="Workspace Description"
+                              prefHeight="120"
+                              style="-fx-background-color: #f7fafc;
                          -fx-background-radius: 10;
                          -fx-border-color: #cbd5e0;
                          -fx-border-radius: 10;
                          -fx-border-width: 1.5;
                          -fx-font-size: 14;"/>
-
+                </VBox>
                 <!-- Buttons -->
                 <HBox spacing="20" alignment="CENTER">
                     <Button text="Create Workspace"
@@ -72,16 +110,7 @@
                            -fx-font-weight: bold;
                            -fx-cursor: hand;"/>
 
-                    <Button text="Cancel"
-                            onAction="#onCancelClicked"
-                            prefWidth="150" prefHeight="50"
-                            style="-fx-background-color: transparent;
-                           -fx-border-color: #cbd5e0;
-                           -fx-border-radius: 10;
-                           -fx-border-width: 1.5;
-                           -fx-text-fill: #4c51bf;
-                           -fx-font-size: 16;
-                           -fx-cursor: hand;"/>
+
                 </HBox>
             </VBox>
 

@@ -36,11 +36,11 @@ public class AdminLoginController {
             password.clear();
             TokenManager.saveToken(response.token());
             NavigationManager.navigateTo(Screens.DASHBOARD);
-            Toast.success(getPane(), "Welcome back, " + response.user().username() + "!");
+            Toast.success(rootPane, "Welcome back, " + response.user().username() + "!");
 
 //            Save the token
         } catch (ApiException e) {
-            Toast.error(getPane(), "Invalid email or password");
+            Toast.error(rootPane, "Invalid email or password");
         }
     }
 

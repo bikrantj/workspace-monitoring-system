@@ -4,6 +4,8 @@ package com.bikrantj.services;
 import com.bikrantj.repositories.WorkspaceRepo;
 import com.bikrantj.shared.model.Workspace;
 
+import java.util.List;
+
 public class WorkspaceService {
 
     private final WorkspaceRepo workspaceRepo;
@@ -37,6 +39,11 @@ public class WorkspaceService {
             return null;
         }
 
-        return workspaceRepo.findActiveById(workspaceId.trim());
+        return workspaceRepo.findById(workspaceId.trim());
+    }
+
+    public List<Workspace> getWorkspacesByAdminId(String adminId) {
+        return workspaceRepo.findAllByAdminId(adminId);
+
     }
 }

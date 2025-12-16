@@ -1,23 +1,37 @@
 package com.bikrantj.client.controllers;
 
+import com.bikrantj.client.auth.UserSession;
+import com.bikrantj.client.navigation.ContentNavigationManager;
+import com.bikrantj.client.navigation.Screens;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class AdminMainController {
+public class AdminMainController implements Initializable {
     @FXML
     private BorderPane mainBorderPane;
 
     public void onCreateWorkspaceClicked(ActionEvent actionEvent) throws IOException {
-        Parent view = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/bikrantj/client/admin-new-workspace.fxml")));
-        mainBorderPane.setCenter(view);
+//        loadView("/com/bikrantj/client/admin-create-workspace.fxml");
+        ContentNavigationManager.navigateTo(Screens.NEW_WORKSPACE, null);
     }
 
-    public void onDashboardClicked(ActionEvent actionEvent) {
+    public void onDashboardClicked(ActionEvent actionEvent) throws IOException {
+        ContentNavigationManager.navigateTo(Screens.DASHBOARD_CONTENT, null);
+    }
+
+    public void onLogoutClicked(MouseEvent mouseEvent) {
+        UserSession.clear();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ContentNavigationManager.initialize(mainBorderPane);
     }
 }
