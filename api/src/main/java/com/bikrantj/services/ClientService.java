@@ -19,9 +19,13 @@ public class ClientService {
         Workspace workspace = workspaceService.validateWorkspace(client.getWorkspaceId());
 
         if (workspace == null) {
+            System.out.println("Registering Client. Invalid workspace ID: " + client.getWorkspaceId());
             return false;
         }
 
+        // change client's workspaceId to db workspace->id
+        client.setWorkspaceId(workspace.getId());
+        System.out.println("Creating client in workspace: " + workspace.getName() + " (" + workspace.getId() + ")");
         clientRepo.create(client);
 //
 //        Check if the workspace is valid before registering the client
@@ -29,8 +33,20 @@ public class ClientService {
         return true;
     }
 
-    public boolean isClientRegistered(String clientIdentifier) {
+    public Client isClientInWorkspace(String clientIdentifier, String workspaceId) {
 //        TODO: Check whether the client has been removed from workspace( Chceck relation).
-        return clientRepo.existsByIdentifier(clientIdentifier);
+        Workspace workspace = workspaceService.validateWorkspace(workspaceId);
+
+        if (workspace == null) {
+            System.out.println("Registering Client. Invalid workspace ID: " + workspaceId);
+            return null;
+        }
+
+        Client client = clientRepo.findByIdentifierAndWorkspace(clientIdentifier, workspaceId);
+        if (client == null) {
+            System.out.println("Client with identifier " + clientIdentifier + " not found in workspace " + workspaceId);
+            return null;
+        }
+        return client;
     }
 }

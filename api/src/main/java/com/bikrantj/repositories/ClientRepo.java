@@ -25,6 +25,12 @@ public class ClientRepo {
                         last_ip_address,
                         status
                     ) VALUES (?, ?, ?, ?, ?, ?)
+                    ON DUPLICATE KEY UPDATE
+                                    workspace_id     = VALUES(workspace_id),
+                                    client_name      = VALUES(client_name),
+                                    os_info           = VALUES(os_info),
+                                    last_ip_address  = VALUES(last_ip_address),
+                                    status            = VALUES(status)
                 """;
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -37,12 +43,14 @@ public class ClientRepo {
             ps.setString(6, client.getStatus().name().toLowerCase());
 
             int affectedRows = ps.executeUpdate();
+            System.out.println("Everything ok till here. Affected rows: " + affectedRows);
             return affectedRows == 1;
 
         } catch (SQLException e) {
-
+            System.out.println("Error SQL State: " + e.getSQLState());
             // Duplicate client (same MAC / identifier)
             if (e.getSQLState() != null && e.getSQLState().startsWith("23")) {
+                System.out.println(e.getMessage());
                 System.err.println("Client already registered with this identifier.");
                 return false;
             }
@@ -55,22 +63,46 @@ public class ClientRepo {
     /**
      * Checks if a client already exists by its unique identifier.
      */
-    public boolean existsByIdentifier(String clientIdentifier) {
+    public Client findByIdentifierAndWorkspace(String clientIdentifier, String workspaceId) {
 
         String sql = """
-                    SELECT 1 FROM clients WHERE client_identifier = ?
+                SELECT
+                    workspace_id,
+                    client_name,
+                    client_identifier,
+                    os_info,
+                    last_ip_address
+                FROM clients
+                WHERE client_identifier = ? AND workspace_id = ?
                 """;
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, clientIdentifier);
+            ps.setString(2, workspaceId);
 
             try (ResultSet rs = ps.executeQuery()) {
-                return rs.next();
+                if (rs.next()) {
+                    Client client = new Client(
+
+                    );
+                    client.setWorkspaceId(rs.getString("workspace_id"));
+                    client.setClientName(
+                            rs.getString("client_name"));
+                    client.setClientIdentifier(
+                            rs.getString("client_identifier"));
+                    client.setOsInfo(
+                            rs.getString("os_info"));
+                    client.setLastIpAddress(
+                            rs.getString("last_ip_address"));
+
+                    return (client);
+                }
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+
+        return null;
     }
 }

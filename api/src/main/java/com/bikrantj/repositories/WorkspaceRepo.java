@@ -90,7 +90,7 @@ public class WorkspaceRepo {
         String sql = """
                     SELECT id, name, description, admin_id, is_active, created_at
                     FROM workspaces
-                    WHERE id = ? AND is_active = TRUE
+                    WHERE uniqueId = ? AND is_active = TRUE
                 """;
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {

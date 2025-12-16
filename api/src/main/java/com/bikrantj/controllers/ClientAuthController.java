@@ -26,28 +26,29 @@ public class ClientAuthController {
                 .get();
 
 
-        Client client = new Client();
+        Client _client = new Client();
 
-        client.setClientIdentifier(req.getClientIdentifier().trim());
-        client.setClientName(req.getClientName().trim());
-        client.setWorkspaceId(req.getWorkspaceId().trim());
-        client.setLastIpAddress(req.getLastIpAddress().trim());
-        client.setOsInfo(req.getOsInfo().trim());
+        _client.setClientIdentifier(req.getClientIdentifier().trim());
+        _client.setClientName(req.getClientName().trim());
+        _client.setWorkspaceId(req.getWorkspaceId().trim());
+        _client.setLastIpAddress(req.getLastIpAddress().trim());
+        _client.setOsInfo(req.getOsInfo().trim());
 
 //        Check if client is already registered
-        boolean exists = clientService.isClientRegistered(client.getClientIdentifier());
+        Client client = clientService.isClientInWorkspace(_client.getClientIdentifier(), _client.getWorkspaceId());
 
-        if (exists) {
+        if (client != null) {
             // Client already registered -> Login successful
             ctx.status(HttpStatus.OK).json(client);
         } else {
-            boolean success = clientService.register(client);
+            boolean success = clientService.register(_client);
             if (success) {
                 ctx.status(HttpStatus.CREATED)
-                        .json(Map.of("message", "Client created successfully"));
+                        .json(_client);
             } else {
+                System.out.println("NOt success in client registration");
                 ctx.status(HttpStatus.BAD_REQUEST)
-                        .json(Map.of("error", "Client already exists"));
+                        .json(Map.of("error", "Failed to register client."));
             }
 
         }

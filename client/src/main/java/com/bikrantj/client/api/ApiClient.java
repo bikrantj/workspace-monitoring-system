@@ -1,7 +1,9 @@
 package com.bikrantj.client.api;
 
 import com.bikrantj.shared.dto.User;
+import com.bikrantj.shared.model.Client;
 import com.bikrantj.shared.model.Workspace;
+import com.bikrantj.shared.requests.CreateClientRequest;
 import com.bikrantj.shared.requests.CreateWorkspaceRequest;
 import com.bikrantj.shared.requests.LoginRequest;
 import com.bikrantj.shared.requests.RegisterRequest;
@@ -31,6 +33,10 @@ public class ApiClient {
 
     public void createWorkspace(CreateWorkspaceRequest request) throws ApiException {
         http.post("/workspace/create", request, Void.class);
+    }
+
+    public Client clientLogin(CreateClientRequest request) throws ApiException {
+        return http.post("/client/login", request, Client.class);
     }
 
     public List<Workspace> getWorkspace() throws ApiException {

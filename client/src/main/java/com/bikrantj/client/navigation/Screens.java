@@ -6,6 +6,7 @@ public enum Screens {
 
     //    Client views
     CLIENT_LOGIN("/com/bikrantj/client/client-login.fxml"),
+    CLIENT_DASHBOARD("/com/bikrantj/client/client-dashboard.fxml"),
 
     //    Admin views
     ADMIN_LOGIN("/com/bikrantj/client/admin-login.fxml"),
