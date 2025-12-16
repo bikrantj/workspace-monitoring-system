@@ -14,13 +14,13 @@ public class InitialViewController {
     @FXML
     private Label welcomeText;
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
 
     public void onAdminButtonClick(ActionEvent actionEvent) {
 //        Navigate to admin login page.
         NavigationManager.navigateTo(Screens.ADMIN_LOGIN);
+    }
+
+    public void onClientButtonClick(ActionEvent actionEvent) {
+        NavigationManager.navigateTo(Screens.CLIENT_LOGIN);
     }
 }

@@ -3,6 +3,7 @@ package com.bikrantj.client.controllers;
 import com.bikrantj.client.AppContext;
 import com.bikrantj.client.api.ApiClient;
 import com.bikrantj.client.api.ApiException;
+import com.bikrantj.client.auth.TokenManager;
 import com.bikrantj.client.auth.UserSession;
 import com.bikrantj.client.navigation.NavigationManager;
 import com.bikrantj.client.navigation.Screens;
@@ -32,8 +33,12 @@ public class AdminLoginController {
 
             UserSession.setUser(response.user(), response.token());
 
-            Toast.success(getPane(), "Welcome back, " + response.user().username() + "!");
             password.clear();
+            TokenManager.saveToken(response.token());
+            NavigationManager.navigateTo(Screens.DASHBOARD);
+            Toast.success(getPane(), "Welcome back, " + response.user().username() + "!");
+
+//            Save the token
         } catch (ApiException e) {
             Toast.error(getPane(), "Invalid email or password");
         }

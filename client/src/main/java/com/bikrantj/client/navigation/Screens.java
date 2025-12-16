@@ -10,7 +10,7 @@ public enum Screens {
     //    Admin views
     ADMIN_LOGIN("/com/bikrantj/client/admin-login.fxml"),
     ADMIN_REGISTER("/com/bikrantj/client/admin-register.fxml"),
-    DASHBOARD("/com/bikrantj/client/dashboard.fxml");
+    DASHBOARD("/com/bikrantj/client/admin-dashboard.fxml");
 
     private final String fxmlPath;
 

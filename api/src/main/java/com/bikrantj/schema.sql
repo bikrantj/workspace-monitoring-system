@@ -1,5 +1,7 @@
 -- Create database
-CREATE DATABASE IF NOT EXISTS workspace_monitor;
+DROP DATABASE IF EXISTS workspace_monitor;
+
+CREATE DATABASE workspace_monitor;
 USE workspace_monitor;
 
 -- Table: workspace_admins (users who create and manage workspaces)
@@ -19,9 +21,9 @@ CREATE TABLE IF NOT EXISTS workspace_admins
 CREATE TABLE IF NOT EXISTS workspaces
 (
     id          VARCHAR(36) PRIMARY KEY DEFAULT (UUID()),
-    name        VARCHAR(100) NOT NULL,
+    name        VARCHAR(100) UNIQUE NOT NULL,
     description TEXT,
-    admin_id    VARCHAR(36)  NOT NULL,                          -- The admin who created this workspace
+    admin_id    VARCHAR(36)         NOT NULL,                   -- The admin who created this workspace
     created_at  TIMESTAMP               DEFAULT CURRENT_TIMESTAMP,
     is_active   BOOLEAN                 DEFAULT TRUE,
 
@@ -33,13 +35,13 @@ CREATE TABLE IF NOT EXISTS workspaces
 CREATE TABLE IF NOT EXISTS clients
 (
     id                VARCHAR(36) PRIMARY KEY    DEFAULT (UUID()),
-    workspace_id      VARCHAR(36)  NOT NULL,
-    client_name       VARCHAR(100) NOT NULL,                 -- Name given by admin to identify this computer
-    client_identifier VARCHAR(255) NOT NULL,                 -- Unique machine ID (MAC address or generated UUID)
+    workspace_id      VARCHAR(36)         NOT NULL,
+    client_name       VARCHAR(100)        NOT NULL,          -- Name given by admin to identify this computer
+    client_identifier VARCHAR(255) UNIQUE NOT NULL,          -- Unique machine ID (MAC address or generated UUID)
     os_info           VARCHAR(255),
     last_ip_address   VARCHAR(45),
     status            ENUM ('online', 'offline') DEFAULT 'offline',
-    last_heartbeat    TIMESTAMP    NULL,
+    last_heartbeat    TIMESTAMP           NULL,
     created_at        TIMESTAMP                  DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (workspace_id) REFERENCES workspaces (id) ON DELETE CASCADE,

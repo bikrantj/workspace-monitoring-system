@@ -1,8 +1,7 @@
 package com.bikrantj.repositories;
 
 import com.bikrantj.db.DBConnection;
-import com.bikrantj.models.WorkspaceAdmin;
-import com.bikrantj.repositories.interfaces.IWorkspaceAdminRepository;
+import com.bikrantj.shared.model.WorkspaceAdmin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,14 +9,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class WorkspaceAdminRepo implements IWorkspaceAdminRepository {
+public class WorkspaceAdminRepo {
+    private final Connection connection;
 
-    @Override
+    public WorkspaceAdminRepo(Connection connection) {
+        this.connection = connection;
+    }
+
     public boolean save(WorkspaceAdmin admin) {
         String sql = "INSERT INTO workspace_admins (username, password_hash, email, salt) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setString(1, admin.getUsername());
             stmt.setString(2, admin.getPasswordHash());
@@ -32,7 +35,6 @@ public class WorkspaceAdminRepo implements IWorkspaceAdminRepository {
         }
     }
 
-    @Override
     public Optional<WorkspaceAdmin> findByEmail(String email) {
         String sql = "SELECT * FROM workspace_admins WHERE email = ?";
 
@@ -58,7 +60,6 @@ public class WorkspaceAdminRepo implements IWorkspaceAdminRepository {
         return Optional.empty();
     }
 
-    @Override
     public boolean existsByEmail(String email) {
         return findByEmail(email).isPresent();
     }

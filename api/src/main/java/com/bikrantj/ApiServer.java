@@ -5,8 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import io.javalin.Javalin;
 
+import java.sql.SQLException;
+
 public class ApiServer {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         ObjectMapper mapper = new ObjectMapper();
         // Remove this line in production if you want smaller responses
         mapper.enable(SerializationFeature.INDENT_OUTPUT);

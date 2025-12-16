@@ -1,4 +1,4 @@
-package com.bikrantj.models;
+package com.bikrantj.shared.model;
 
 public class WorkspaceAdmin {
     private String id;

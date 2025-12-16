@@ -47,7 +47,7 @@
 
         <!-- Buttons -->
         <Button text="Login as Client"
-                onAction="#onHelloButtonClick"
+                onAction="#onClientButtonClick"
                 prefWidth="300"
                 prefHeight="52"
                 style="-fx-background-color: #4c51bf;

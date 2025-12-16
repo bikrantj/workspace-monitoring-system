@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/21"
+            fx:controller="com.bikrantj.client.controllers.AdminMainController"
+            fx:id="mainBorderPane"
+            prefHeight="700.0" prefWidth="1100.0"
+            style="-fx-background-color: #f8f9fc;">
+
+    <!-- Sidebar (Left) -->
+    <left>
+        <VBox style="-fx-background-color: white;
+                 -fx-border-color: #e2e8f0;
+                 -fx-border-width: 0 1 0 0;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 15, 0, 4, 0);"
+              prefWidth="360.0"
+              spacing="24.0"
+              alignment="TOP_CENTER">
+            <padding>
+                <Insets top="40" right="24" bottom="40" left="24"/>
+            </padding>
+
+            <!-- Logo / Title -->
+            <Label text="Admin Panel"
+                   style="-fx-text-fill: #1e293b;
+                      -fx-font-size: 26;
+                      -fx-font-weight: bold;"/>
+
+            <Separator style="-fx-background-color: #e2e8f0;" prefWidth="212"/>
+
+            <!-- Create New Workspace Button (Prominent at top) -->
+            <Button text="Create New Workspace"
+                    onAction="#onCreateWorkspaceClicked"
+                    prefWidth="260" prefHeight="50"
+                    style="-fx-background-color: #4c51bf;
+                       -fx-background-radius: 12;
+                       -fx-text-fill: white;
+                       -fx-font-size: 16;
+                       -fx-font-weight: bold;
+                       -fx-cursor: hand;
+                       -fx-alignment: CENTER_LEFT;
+                       -fx-padding: 0 0 0 16;">
+                <graphic>
+                    <Label text="➕" style="-fx-font-size: 20; -fx-text-fill: white; -fx-padding: 0 12 0 0;"/>
+                </graphic>
+            </Button>
+
+            <Separator style="-fx-background-color: #e2e8f0;" prefWidth="212"/>
+
+            <!-- Navigation Buttons -->
+            <VBox spacing="8" prefWidth="212">
+                <Button text="Dashboard"
+                        onAction="#onDashboardClicked"
+                        prefWidth="212" prefHeight="48"
+                        styleClass="sidebar-nav-button"
+                        style="-fx-background-color: transparent;
+                           -fx-text-fill: #64748b;
+                           -fx-font-size: 15;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-padding: 0 0 0 16;
+                           -fx-cursor: hand;">
+                    <graphic>
+                        <Label text="🏠" style="-fx-font-size: 20; -fx-text-fill: #64748b; -fx-padding: 0 16 0 0;"/>
+                    </graphic>
+                </Button>
+
+                <!-- Additional navigation items (repeat pattern) -->
+                <Button text="Users Management"
+                        prefWidth="212" prefHeight="48"
+                        styleClass="sidebar-nav-button"
+                        style="-fx-background-color: transparent;
+                           -fx-text-fill: #64748b;
+                           -fx-font-size: 15;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-padding: 0 0 0 16;
+                           -fx-cursor: hand;">
+                    <graphic>
+                        <Label text="👥" style="-fx-font-size: 20; -fx-text-fill: #64748b; -fx-padding: 0 16 0 0;"/>
+                    </graphic>
+                </Button>
+
+                <Button text="Settings"
+                        prefWidth="212" prefHeight="48"
+                        styleClass="sidebar-nav-button"
+                        style="-fx-background-color: transparent;
+                           -fx-text-fill: #64748b;
+                           -fx-font-size: 15;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-padding: 0 0 0 16;
+                           -fx-cursor: hand;">
+                    <graphic>
+                        <Label text="⚙️" style="-fx-font-size: 20; -fx-text-fill: #64748b; -fx-padding: 0 16 0 0;"/>
+                    </graphic>
+                </Button>
+                <Button text="Logout"
+                        prefWidth="212" prefHeight="48"
+                        style="-fx-background-color: transparent;
+                           -fx-text-fill: #ef4444;
+                           -fx-font-size: 15;
+                           -fx-alignment: CENTER_LEFT;
+                           -fx-padding: 0 0 0 16;
+                           -fx-cursor: hand;">
+                    <graphic>
+                        <Label text="🚪" style="-fx-font-size: 20; -fx-text-fill: #ef4444; -fx-padding: 0 16 0 0;"/>
+                    </graphic>
+                </Button>
+            </VBox>
+
+        </VBox>
+    </left>
+
+    <!-- Main Content Area (Center) - Initially load dashboard content -->
+    <center>
+        <fx:include source="admin-dashboard-content.fxml"/>
+    </center>
+
+</BorderPane>

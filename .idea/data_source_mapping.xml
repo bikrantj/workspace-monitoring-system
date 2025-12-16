@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/ClientRepo.java" value="c8fcc18b-650f-4e7e-b499-a90e11393ed4" />
+    <file url="file://$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/WorkspaceRepo.java" value="c8fcc18b-650f-4e7e-b499-a90e11393ed4" />
     <file url="file://$PROJECT_DIR$/api/src/main/java/com/bikrantj/schema.sql" value="c8fcc18b-650f-4e7e-b499-a90e11393ed4" />
   </component>
 </project>

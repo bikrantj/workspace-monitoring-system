@@ -1,16 +1,23 @@
 package com.bikrantj.services;
 
-import com.bikrantj.models.WorkspaceAdmin;
-import com.bikrantj.repositories.interfaces.IWorkspaceAdminRepository;
+import com.bikrantj.repositories.WorkspaceAdminRepo;
+import com.bikrantj.shared.dto.User;
+import com.bikrantj.shared.model.Workspace;
+import com.bikrantj.shared.model.WorkspaceAdmin;
 import com.bikrantj.utils.PasswordUtil;
+import io.javalin.http.Context;
+import io.javalin.http.HttpStatus;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class WorkspaceAdminService {
-    private final IWorkspaceAdminRepository adminRepository;
+    private final WorkspaceAdminRepo adminRepository;
+    private final WorkspaceService workspaceService;
 
-    public WorkspaceAdminService(IWorkspaceAdminRepository adminRepository) {
+    public WorkspaceAdminService(WorkspaceAdminRepo adminRepository, WorkspaceService workspaceService) {
         this.adminRepository = adminRepository;
+        this.workspaceService = workspaceService;
     }
 
     public boolean register(String username, String password, String email) {
@@ -51,6 +58,29 @@ public class WorkspaceAdminService {
                 admin.getEmail()
         );
         return Optional.of(new LoginResult(token, admin));
+    }
+
+
+    public boolean createWorkspace(Workspace workspace) {
+        return workspaceService.createWorkspace(workspace);
+    }
+
+    public User getCurrentAdmin(Context context) {
+        String authHeader = context.header("Authorization");
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            context.status(HttpStatus.UNAUTHORIZED).json(Map.of("error", "Unauthorized"));
+            return null;
+        }
+        String token = authHeader.substring(7);
+
+        Optional<WorkspaceAdmin> adminOpt = this.validateToken(token);
+        if (adminOpt.isEmpty()) {
+            context.status(HttpStatus.UNAUTHORIZED).json(Map.of("error", "Invalid or expired token"));
+            return null;
+        }
+
+        WorkspaceAdmin admin = adminOpt.get();
+        return new User(admin.getId(), admin.getUsername(), admin.getEmail());
     }
 
     public Optional<WorkspaceAdmin> validateToken(String token) {

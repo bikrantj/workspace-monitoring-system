@@ -1,22 +1,21 @@
 package com.bikrantj.controllers;
 
-import com.bikrantj.models.WorkspaceAdmin;
 import com.bikrantj.services.WorkspaceAdminService;
 import com.bikrantj.shared.dto.User;
+import com.bikrantj.shared.model.WorkspaceAdmin;
 import com.bikrantj.shared.requests.LoginRequest;
 import com.bikrantj.shared.requests.RegisterRequest;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 
 import java.util.Map;
-import java.util.Optional;
 
 public class AuthController {
 
-    private final WorkspaceAdminService adminService;
+    private final WorkspaceAdminService workspaceAdminService;
 
     public AuthController(WorkspaceAdminService adminService) {
-        this.adminService = adminService;
+        this.workspaceAdminService = adminService;
     }
 
 
@@ -29,7 +28,7 @@ public class AuthController {
                 .check(r -> r.getEmail() != null && !r.getEmail().trim().isEmpty(), "Email is required")
                 .get();
 
-        boolean success = adminService.register(
+        boolean success = workspaceAdminService.register(
                 req.getUsername().trim(),
                 req.getPassword(),
                 req.getEmail().trim()
@@ -53,7 +52,7 @@ public class AuthController {
                 .check(r -> r.getPassword() != null && !r.getPassword().trim().isEmpty(), "Password is required")
                 .get();
 
-        var result = adminService.login(req.getEmail().trim(), req.getPassword());
+        var result = workspaceAdminService.login(req.getEmail().trim(), req.getPassword());
 
         if (result.isEmpty()) {
             ctx.status(HttpStatus.UNAUTHORIZED)
@@ -78,21 +77,13 @@ public class AuthController {
     }
 
     public void getCurrentAdmin(Context context) {
-        String authHeader = context.header("Authorization");
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            context.status(HttpStatus.UNAUTHORIZED).json(Map.of("error", "Unauthorized"));
-            return;
+        User user = workspaceAdminService.getCurrentAdmin(context);
+        if (user != null) {
+            context.status(HttpStatus.OK).json(user);
+        } else {
+            context.status(HttpStatus.UNAUTHORIZED)
+                    .json(Map.of("error", "Unauthorized"));
         }
-        String token = authHeader.substring(7);
-
-        Optional<WorkspaceAdmin> adminOpt = adminService.validateToken(token);
-        if (adminOpt.isEmpty()) {
-            context.status(HttpStatus.UNAUTHORIZED).json(Map.of("error", "Invalid or expired token"));
-            return;
-        }
-
-        WorkspaceAdmin admin = adminOpt.get();
-        context.json(new User(admin.getId(), admin.getUsername(), admin.getEmail()));
     }
 
 }

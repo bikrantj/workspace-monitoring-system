@@ -7,6 +7,8 @@ import com.bikrantj.client.navigation.NavigationManager;
 import com.bikrantj.client.navigation.Screens;
 import com.bikrantj.shared.dto.User;
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class ClientApp extends Application {
@@ -18,10 +20,13 @@ public class ClientApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         AppContext.initialize("http://localhost:8000");
+        Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+
         // Set up the primary stage
         primaryStage.setTitle("Project IV");
-        primaryStage.setWidth(800);
-        primaryStage.setHeight(600);
+
+        primaryStage.setMaximized(true);
+
 
         // Initialize NavigationManager
         NavigationManager.setPrimaryStage(primaryStage);
@@ -29,9 +34,14 @@ public class ClientApp extends Application {
         if (savedToken != null && !savedToken.isBlank()) {
             try {
                 User profile = AppContext.getApiClient().getCurrentUser();
-                UserSession.setUser(profile, savedToken);
+                if (profile != null) {
+                    UserSession.setUser(profile, savedToken);
 //                TODO: Show different screen
-                NavigationManager.navigateTo(Screens.ADMIN_LOGIN);
+                    NavigationManager.navigateTo(Screens.DASHBOARD);
+
+                } else {
+                    throw new ApiException("Invalid token");
+                }
             } catch (ApiException e) {
                 // Navigate to initial view
                 System.out.println("Not logged in");

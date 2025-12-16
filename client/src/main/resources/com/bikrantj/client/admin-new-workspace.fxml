@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/21"
+            fx:controller="com.bikrantj.client.controllers.AdminNewWorkspaceController"
+            fx:id="rootPane"
+            style="-fx-background-color: #f8f9fc;">
+    <StackPane AnchorPane.topAnchor="0"
+               AnchorPane.bottomAnchor="0"
+               AnchorPane.leftAnchor="0"
+               AnchorPane.rightAnchor="0">
+        <VBox spacing="30"
+              alignment="CENTER">
+            <padding>
+                <Insets top="60" right="40" bottom="40" left="40"/>
+            </padding>
+
+            <!-- White Card -->
+            <VBox style="-fx-background-color: white;
+                 -fx-background-radius: 16;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 20, 0, 0, 5);
+                 -fx-border-color: #e0e6ed;
+                 -fx-border-radius: 16;
+                 -fx-border-width: 1;"
+                  maxWidth="500" prefWidth="500"
+                  alignment="CENTER"
+                  spacing="25">
+                <padding>
+                    <Insets top="45" right="50" bottom="45" left="50"/>
+                </padding>
+
+                <Label text="Create New Workspace"
+                       style="-fx-text-fill: #2d3748;
+                      -fx-font-size: 28;
+                      -fx-font-weight: bold;"/>
+
+                <!-- Name Field -->
+                <TextField fx:id="nameField"
+                           promptText="Workspace Name"
+                           prefHeight="48"
+                           style="-fx-background-color: #f7fafc;
+                          -fx-background-radius: 10;
+                          -fx-border-color: #cbd5e0;
+                          -fx-border-radius: 10;
+                          -fx-border-width: 1.5;
+                          -fx-padding: 0 15 0 15;
+                          -fx-font-size: 14;"/>
+
+                <!-- Description Field -->
+                <TextArea fx:id="descriptionArea"
+                          promptText="Workspace Description"
+                          prefHeight="120"
+                          style="-fx-background-color: #f7fafc;
+                         -fx-background-radius: 10;
+                         -fx-border-color: #cbd5e0;
+                         -fx-border-radius: 10;
+                         -fx-border-width: 1.5;
+                         -fx-font-size: 14;"/>
+
+                <!-- Buttons -->
+                <HBox spacing="20" alignment="CENTER">
+                    <Button text="Create Workspace"
+                            onAction="#onCreateClicked"
+                            prefWidth="200" prefHeight="50"
+                            style="-fx-background-color: #4c51bf;
+                           -fx-background-radius: 10;
+                           -fx-text-fill: white;
+                           -fx-font-size: 16;
+                           -fx-font-weight: bold;
+                           -fx-cursor: hand;"/>
+
+                    <Button text="Cancel"
+                            onAction="#onCancelClicked"
+                            prefWidth="150" prefHeight="50"
+                            style="-fx-background-color: transparent;
+                           -fx-border-color: #cbd5e0;
+                           -fx-border-radius: 10;
+                           -fx-border-width: 1.5;
+                           -fx-text-fill: #4c51bf;
+                           -fx-font-size: 16;
+                           -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+
+        </VBox>
+    </StackPane>
+</AnchorPane>
