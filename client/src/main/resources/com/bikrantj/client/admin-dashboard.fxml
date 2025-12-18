@@ -9,7 +9,7 @@
             fx:controller="com.bikrantj.client.controllers.AdminMainController"
             fx:id="mainBorderPane"
             prefHeight="700.0" prefWidth="1100.0"
-            style="-fx-background-color: #f8f9fc;">
+>
 
     <!-- Sidebar (Left) -->
     <left>

@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS clients
     last_heartbeat    TIMESTAMP           NULL,
     created_at        TIMESTAMP                  DEFAULT CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (workspace_id) REFERENCES workspaces (id) ON DELETE CASCADE,
+    FOREIGN KEY (workspace_id) REFERENCES workspaces (uniqueId) ON DELETE CASCADE,
     UNIQUE KEY unique_client_identifier (client_identifier), -- Same computer can't join multiple workspaces
     INDEX idx_client_workspace (workspace_id),
     INDEX idx_client_status (status),
@@ -59,7 +59,7 @@ CREATE TABLE monitoring_snapshots
     collected_at TIMESTAMP               DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (client_id) REFERENCES clients (id) ON DELETE CASCADE,
-    FOREIGN KEY (workspace_id) REFERENCES workspaces (id) ON DELETE CASCADE
+    FOREIGN KEY (workspace_id) REFERENCES workspaces (uniqueId) ON DELETE CASCADE
 );
 -- Table: screenshots (store screenshot metadata)
 CREATE TABLE IF NOT EXISTS screenshots
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS screenshots
     FOREIGN KEY (snapshot_id) REFERENCES monitoring_snapshots (id) ON DELETE CASCADE,
 
     FOREIGN KEY (client_id) REFERENCES clients (id) ON DELETE CASCADE,
-    FOREIGN KEY (workspace_id) REFERENCES workspaces (id) ON DELETE CASCADE,
+    FOREIGN KEY (workspace_id) REFERENCES workspaces (uniqueId) ON DELETE CASCADE,
     INDEX idx_screenshot_client (client_id),
     INDEX idx_screenshot_time (capture_time)
 );
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS processes
     FOREIGN KEY (snapshot_id) REFERENCES monitoring_snapshots (id) ON DELETE CASCADE,
 
     FOREIGN KEY (client_id) REFERENCES clients (id) ON DELETE CASCADE,
-    FOREIGN KEY (workspace_id) REFERENCES workspaces (id) ON DELETE CASCADE,
+    FOREIGN KEY (workspace_id) REFERENCES workspaces (uniqueId) ON DELETE CASCADE,
     INDEX idx_processes_client (client_id),
     INDEX idx_processes_time (collected_at)
 );

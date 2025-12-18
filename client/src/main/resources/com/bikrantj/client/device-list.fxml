@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.bikrantj.client.controllers.DeviceListController"
+            fitToWidth="true"
+            hbarPolicy="NEVER"
+            style="-fx-background-color: transparent;">
+
+    <FlowPane fx:id="deviceContainer"
+              prefWrapLength="1000"
+              hgap="12"
+              vgap="12"
+              maxWidth="Infinity"
+              style="-fx-background-color: transparent;">
+        <padding>
+            <Insets top="12" right="12" bottom="12"/>
+        </padding>
+    </FlowPane>
+</ScrollPane>

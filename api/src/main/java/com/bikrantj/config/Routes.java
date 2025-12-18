@@ -26,6 +26,7 @@ public class Routes {
         AuthController authController = new AuthController(workspaceAdminService);
         WorkspaceController workspaceController = new WorkspaceController(workspaceAdminService, workspaceService);
         ClientAuthController clientAuthController = new ClientAuthController(clientService);
+        ClientController clientController = new ClientController(clientService);
 
         ScreenshotRepo screenshotRepo = new ScreenshotRepo(con);
         SnapshotRepo snapshotRepo = new SnapshotRepo(con);
@@ -44,9 +45,13 @@ public class Routes {
 //        Client routes
         app.post("/client/login", clientAuthController::login);
 
+
 //        Workspace routes
         app.post("/workspace/create", workspaceController::createWorkspace);
         app.get("/workspace", workspaceController::getWorkspaces);
+        app.get("/workspace/{workspaceId}/client/{clientId}", clientController::getClientByIdentifier);
+        app.get("/workspace/{workspaceId}/clients", clientController::getAllClientsByWorkspace);
+        app.get("/workspace/{workspaceId}/client/{clientId}/metrics/high-ram", metricsController::getHighRamUsageProcesses);
 // Client Monitoring:
         app.post("/monitoring/ingest", monitoringController::ingest);
 

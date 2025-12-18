@@ -1,6 +1,7 @@
 package com.bikrantj.controllers;
 
 import com.bikrantj.services.MetricsService;
+import com.bikrantj.shared.responses.HighRamProcessUsage;
 import com.bikrantj.shared.responses.WorkspaceActivityPoint;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
@@ -13,6 +14,33 @@ public class MetricsController {
 
     public MetricsController(MetricsService metricsService) {
         this.metricsService = metricsService;
+    }
+
+    public void getHighRamUsageProcesses(Context ctx) {
+
+        String workspaceId = ctx.pathParam("workspaceId");
+        String clientId = ctx.pathParam("clientId");
+
+        if (workspaceId.isBlank() || clientId.isBlank()) {
+            ctx.status(400).json("workspaceId and clientId are required");
+            return;
+        }
+
+        List<HighRamProcessUsage> data = metricsService.getHighRamUsageProcesses(
+                workspaceId,
+                clientId
+        );
+
+        System.out.println("High RAM Usage Processes for clientId: " + clientId + " in workspaceId: " + workspaceId);
+        for (HighRamProcessUsage process : data) {
+            System.out.println("Process Name: " + process.getProcessName() +
+                    ", PID: " + process.getProcessName() +
+                    ", RAM Usage (MB): " + process.getAvgMemoryUsage());
+        }
+
+        ctx.json(
+                data
+        );
     }
 
     public void getWorkspaceActivity(Context ctx) {

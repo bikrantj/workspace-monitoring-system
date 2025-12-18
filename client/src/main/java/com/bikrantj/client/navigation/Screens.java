@@ -15,6 +15,9 @@ public enum Screens {
     ADMIN_REGISTER("/com/bikrantj/client/admin-register.fxml"),
     DASHBOARD_CONTENT("/com/bikrantj/client/admin-dashboard-content.fxml"),
     DASHBOARD("/com/bikrantj/client/admin-dashboard.fxml"),
+    DEVICE_LIST("/com/bikrantj/client/device-list.fxml"),
+    DEVICE_DETAIL("/com/bikrantj/client/device-detail.fxml"),
+    DEVICE_CARD("/com/bikrantj/client/device-card.fxml"),
     WORKSPACE("/com/bikrantj/client/workspace.fxml");
 
     private final String fxmlPath;

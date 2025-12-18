@@ -4,6 +4,8 @@ import com.bikrantj.repositories.ClientRepo;
 import com.bikrantj.shared.model.Client;
 import com.bikrantj.shared.model.Workspace;
 
+import java.util.List;
+
 public class ClientService {
     private final WorkspaceService workspaceService;
     private final ClientRepo clientRepo;
@@ -24,7 +26,7 @@ public class ClientService {
         }
 
         // change client's workspaceId to db workspace->id
-        c.setWorkspaceId(workspace.getId());
+//        c.setWorkspaceId(workspace.getId());
         System.out.println("Creating client in workspace: " + workspace.getName() + " (" + workspace.getId() + ")");
         //
 //        Check if the workspace is valid before registering the client
@@ -47,5 +49,16 @@ public class ClientService {
             return null;
         }
         return client;
+    }
+
+    public List<Client> getAllClientsByWorkspace(String workspaceId) {
+        Workspace workspace = workspaceService.validateWorkspace(workspaceId);
+
+        if (workspace == null) {
+            System.out.println("Fetching Clients. Invalid workspace ID: " + workspaceId);
+            return null;
+        }
+
+        return clientRepo.findAllByWorkspace(workspaceId);
     }
 }

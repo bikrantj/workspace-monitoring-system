@@ -9,7 +9,7 @@
       xmlns="http://javafx.com/javafx/21"
       fx:controller="com.bikrantj.client.controllers.WorkspaceController"
       spacing="20"
-      style="-fx-background-color: #edf2f7;">
+>
 
     <padding>
         <Insets top="30" right="40" bottom="40" left="40"/>
@@ -27,16 +27,35 @@
                 vbarPolicy="AS_NEEDED"
                 style="-fx-background-color: transparent;">
 
-        <FlowPane fx:id="graphContainer"
-                  hgap="20"
-                  vgap="20"
-                  prefWrapLength="900"
-        >
+        <VBox spacing="30">
 
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-        </FlowPane>
+            <VBox fx:id="deviceListContainer"
+                  spacing="12">
+                <Label text="Devices"
+                       style="
+                   -fx-font-size: 18px;
+                   -fx-font-weight: bold;
+                   -fx-text-fill: #1f2937;
+               "/>
+            </VBox>
+            <!-- GRAPH SECTION -->
+            <FlowPane fx:id="graphContainer"
+                      hgap="20"
+                      vgap="20"
+                      prefWrapLength="900">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </FlowPane>
+
+            <!-- DEVICE LIST SECTION -->
+
+
+            <!-- FUTURE SECTION -->
+            <!--            <VBox fx:id="xContainer"-->
+            <!--                  spacing="12"/>-->
+
+        </VBox>
 
     </ScrollPane>
 

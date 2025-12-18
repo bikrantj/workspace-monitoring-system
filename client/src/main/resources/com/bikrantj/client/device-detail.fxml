@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="com.bikrantj.client.controllers.DeviceDetailController">
+
+    <VBox spacing="12"
+          AnchorPane.topAnchor="20"
+          AnchorPane.leftAnchor="20"
+          AnchorPane.rightAnchor="20">
+
+        <!-- Section Title -->
+        <Label text="High RAM Usage Apps"
+               style="
+                   -fx-font-size: 18px;
+                   -fx-font-weight: bold;
+                   -fx-text-fill: #1f2937;
+               "/>
+
+        <!-- Cards Container -->
+        <FlowPane fx:id="highRamContainer"
+                  hgap="16"
+                  vgap="16"
+                  prefWrapLength="900">
+
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+        </FlowPane>
+
+    </VBox>
+
+</AnchorPane>

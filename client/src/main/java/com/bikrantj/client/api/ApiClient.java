@@ -4,6 +4,7 @@ import com.bikrantj.shared.dto.User;
 import com.bikrantj.shared.model.Client;
 import com.bikrantj.shared.model.Workspace;
 import com.bikrantj.shared.requests.*;
+import com.bikrantj.shared.responses.HighRamProcessUsage;
 import com.bikrantj.shared.responses.LoginResponse;
 import com.bikrantj.shared.responses.WorkspaceActivityPoint;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -53,5 +54,27 @@ public class ApiClient {
                         new TypeReference<List<WorkspaceActivityPoint>>() {
                         }
                 );
+    }
+
+    public List<Client> getClientsByWorkspace(String workspaceId) throws ApiException {
+        System.out.println("API: Fetching clients for workspace ID: " + workspaceId);
+        return http
+                .getGeneric(
+                        "/workspace/" + workspaceId + "/clients",
+                        new TypeReference<List<Client>>() {
+                        }
+                );
+    }
+
+
+    public List<HighRamProcessUsage> getHighRamUsageProcesses(String workspaceId, String clientId) throws ApiException {
+        return http
+                .getGeneric(
+                        "/workspace/" + workspaceId + "/client/" + clientId + "/metrics/high-ram",
+                        new TypeReference<List<HighRamProcessUsage>>() {
+                        }
+                );
+
+
     }
 }

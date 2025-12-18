@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientRepo {
     private final Connection con;
@@ -100,6 +102,45 @@ public class ClientRepo {
             e.printStackTrace();
         }
 
+        return null;
+    }
+
+    public List<Client> findAllByWorkspace(String workspaceId) {
+        String sql = """
+                SELECT
+                    *
+                FROM clients
+                WHERE workspace_id = ?
+                """;
+
+        try (PreparedStatement ps = con.prepareStatement(sql);) {
+
+            ps.setString(1, workspaceId);
+            List<Client> clients = new ArrayList<>();
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Client client = new Client();
+                    client.setWorkspaceId(rs.getString("workspace_id"));
+                    client.setId(rs.getString("id"));
+                    client.setClientName(
+                            rs.getString("client_name"));
+                    client.setClientIdentifier(
+                            rs.getString("client_identifier"));
+                    client.setOsInfo(
+                            rs.getString("os_info"));
+                    client.setLastIpAddress(
+                            rs.getString("last_ip_address"));
+                    clients.add(client);
+                }
+//                return clients;
+                // Implementation goes here
+            }
+            return clients;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Implementation goes here
         return null;
     }
 }

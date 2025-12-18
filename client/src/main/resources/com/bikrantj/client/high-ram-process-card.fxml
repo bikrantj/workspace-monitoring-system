@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.bikrantj.client.controllers.HighRamProcessCardController"
+      spacing="6"
+      maxWidth="Infinity"
+      style="
+          -fx-background-color: #fff7ed;
+          -fx-border-color: #fed7aa;
+          -fx-border-radius: 12;
+          -fx-background-radius: 12;
+      ">
+
+    <padding>
+        <Insets top="12" right="14" bottom="12" left="14"/>
+    </padding>
+
+    <Label fx:id="processNameLabel"
+           style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+    <Label fx:id="ramLabel"
+           style="-fx-text-fill: #7c2d12;"/>
+
+    <Label fx:id="cpuLabel"
+           style="-fx-text-fill: #92400e;"/>
+
+</VBox>

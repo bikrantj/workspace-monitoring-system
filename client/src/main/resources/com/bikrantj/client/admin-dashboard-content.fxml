@@ -7,7 +7,6 @@
             xmlns="http://javafx.com/javafx/21"
             fx:controller="com.bikrantj.client.controllers.AdminDashboardController"
             fx:id="mainBorderPane"
-            style="-fx-background-color: red;"
 >
 
     <VBox
@@ -16,7 +15,7 @@
             AnchorPane.bottomAnchor="0.0"
             AnchorPane.leftAnchor="0.0"
             AnchorPane.rightAnchor="0.0"
-            style="-fx-background-color: #f8f9fc;">
+    >
         <padding>
             <Insets top="40" right="40" bottom="40" left="40"/>
         </padding>

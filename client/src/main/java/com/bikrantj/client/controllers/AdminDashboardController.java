@@ -62,7 +62,7 @@ public class AdminDashboardController implements Initializable {
 
         card.getChildren().addAll(nameLabel, descLabel);
 
-        card.setOnMouseClicked(event -> openWorkspace(workspace.getId()));
+        card.setOnMouseClicked(event -> openWorkspace(workspace.getUniqueId()));
 
         return card;
     }
