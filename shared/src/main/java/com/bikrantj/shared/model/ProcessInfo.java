@@ -1,7 +1,7 @@
 package com.bikrantj.shared.model;
 
 
-import java.time.Instant;
+import java.sql.Timestamp;
 
 public class ProcessInfo {
 
@@ -14,7 +14,11 @@ public class ProcessInfo {
     private long memoryUsage;
     private double cpuUsage;
     private String windowTitle;
-    private Instant collectedAt;
+    private Timestamp collectedAt;
+    private double memoryUsageMB;
+
+    public ProcessInfo() {
+    }
 
     public ProcessInfo(
             String id,
@@ -26,7 +30,7 @@ public class ProcessInfo {
             long memoryUsage,
             double cpuUsage,
             String windowTitle,
-            Instant collectedAt
+            Timestamp collectedAt
     ) {
         this.id = id;
         this.snapshotId = snapshotId;
@@ -38,6 +42,28 @@ public class ProcessInfo {
         this.cpuUsage = cpuUsage;
         this.windowTitle = windowTitle;
         this.collectedAt = collectedAt;
+    }
+
+    public ProcessInfo(
+            int processId,
+            String processName,
+            long memoryUsage,
+            double cpuUsage,
+            String windowTitle
+    ) {
+        this.processId = processId;
+        this.processName = processName;
+        this.memoryUsage = memoryUsage;
+        this.cpuUsage = cpuUsage;
+        this.windowTitle = windowTitle;
+    }
+
+    public long getMemoryUsage() {
+        return memoryUsage;
+    }
+
+    public void setMemoryUsage(long memoryUsage) {
+        this.memoryUsage = memoryUsage;
     }
 
     public String getId() {
@@ -73,7 +99,7 @@ public class ProcessInfo {
     }
 
     public String getProcessName() {
-        return processName;
+        return processName != null ? processName : "";
     }
 
     public void setProcessName(String processName) {
@@ -88,14 +114,6 @@ public class ProcessInfo {
         this.processId = processId;
     }
 
-    public long getMemoryUsage() {
-        return memoryUsage;
-    }
-
-    public void setMemoryUsage(long memoryUsage) {
-        this.memoryUsage = memoryUsage;
-    }
-
     public double getCpuUsage() {
         return cpuUsage;
     }
@@ -104,19 +122,33 @@ public class ProcessInfo {
         this.cpuUsage = cpuUsage;
     }
 
+    //    Getter function for table display.
+    public double getMemoryUsageMB() {
+        if (memoryUsage <= 0) {
+            return 0.0;
+        }
+        return Math.round((memoryUsage / (1024.0 * 1024.0)) * 100.0) / 100.0;
+    }
+
+    public void setMemoryUsageMB(double memoryUsageMB) {
+        this.memoryUsageMB = memoryUsageMB;
+    }
+
     public String getWindowTitle() {
-        return windowTitle;
+        return windowTitle != null ? windowTitle : "";
     }
 
     public void setWindowTitle(String windowTitle) {
         this.windowTitle = windowTitle;
     }
 
-    public Instant getCollectedAt() {
+    public Timestamp getCollectedAt() {
         return collectedAt;
     }
 
-    public void setCollectedAt(Instant collectedAt) {
+    public void setCollectedAt(Timestamp collectedAt) {
         this.collectedAt = collectedAt;
     }
+
+
 }

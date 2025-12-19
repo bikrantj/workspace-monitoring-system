@@ -1,37 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx"
             fx:controller="com.bikrantj.client.controllers.DeviceDetailController">
 
-    <VBox spacing="12"
-          AnchorPane.topAnchor="20"
-          AnchorPane.leftAnchor="20"
-          AnchorPane.rightAnchor="20">
+    <!-- Rest of your existing content follows -->
+    <ScrollPane fitToWidth="true"
+                AnchorPane.topAnchor="0"
+                AnchorPane.bottomAnchor="0"
+                AnchorPane.leftAnchor="0"
+                AnchorPane.rightAnchor="0">
 
-        <!-- Section Title -->
-        <Label text="High RAM Usage Apps"
-               style="
+
+        <VBox spacing="12"
+        >
+            <padding>
+                <Insets top="18" right="24" bottom="18" left="24"/>
+            </padding>
+
+            <!-- Inside the VBox in device-detail.fxml -->
+            <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 0 0 20 0;">
+                <Button text="↻ Refresh" onAction="#handleRefresh"
+                        style="-fx-font-size: 14px; -fx-padding: 8 16; -fx-background-radius: 8;"/>
+            </HBox>
+            <!-- Section Title -->
+            <Label text="High RAM Usage Apps"
+                   style="
                    -fx-font-size: 18px;
                    -fx-font-weight: bold;
                    -fx-text-fill: #1f2937;
                "/>
 
-        <!-- Cards Container -->
-        <FlowPane fx:id="highRamContainer"
-                  hgap="16"
-                  vgap="16"
-                  prefWrapLength="900">
+            <!-- Cards Container -->
+            <FlowPane fx:id="highRamContainer"
+                      hgap="16"
+                      vgap="16"
+                      prefWrapLength="900">
 
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
 
-        </FlowPane>
+            </FlowPane>
+            <FlowPane fx:id="clientActivityGraphContainer"
+                      hgap="16"
+                      vgap="16"
+                      prefWrapLength="900">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+            </FlowPane>
+            <VBox spacing="8">
+                <Label text="Running Processes (Latest Snapshot)"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1f2937;"/>
 
-    </VBox>
+                <TableView fx:id="processesTable"
+                           prefHeight="800">
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                    <columns>
+                        <TableColumn text="Process Name" prefWidth="220">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="processName"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="PID" prefWidth="80">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="processId"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="memoryColumn" text="Memory Usage (MB)" prefWidth="140">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="memoryUsageMB"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="CPU Usage (%)" prefWidth="120">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="cpuUsage"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn text="Window Title" prefWidth="350">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="windowTitle"/>
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+            </VBox>
+
+
+        </VBox>
+    </ScrollPane>
 
 </AnchorPane>

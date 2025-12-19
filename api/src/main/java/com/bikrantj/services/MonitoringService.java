@@ -9,7 +9,7 @@ import com.bikrantj.shared.model.ProcessInfo;
 import com.bikrantj.shared.requests.MonitoringPayload;
 import com.bikrantj.shared.requests.ProcessPayload;
 
-import java.time.Instant;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +62,7 @@ public class MonitoringService {
                             p.getMemoryUsage(),
                             p.getCpuUsage(),
                             p.getWindowTitle(),
-                            Instant.now()
+                            new Timestamp(System.currentTimeMillis())
                     )
             );
         }

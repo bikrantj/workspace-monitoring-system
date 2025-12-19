@@ -2,6 +2,7 @@ package com.bikrantj.client.clientruntime.collectors;
 
 import com.bikrantj.client.clientruntime.data.ProcessMonitoringData;
 import com.bikrantj.client.clientruntime.monitoring.MonitoringContext;
+import com.bikrantj.shared.model.ProcessInfo;
 import oshi.SystemInfo;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
@@ -23,7 +24,7 @@ public class ProcessCollector implements DataCollector<ProcessMonitoringData> {
             MonitoringContext context,
             Instant timestamp
     ) {
-        List<ProcessMonitoringData.ProcessInfo> processes =
+        List<ProcessInfo> processes =
                 os.getProcesses().stream()
                         .filter(p -> p.getUser() != null)
                         .filter(this::isUserApplication)
@@ -40,23 +41,24 @@ public class ProcessCollector implements DataCollector<ProcessMonitoringData> {
         );
     }
 
-    private ProcessMonitoringData.ProcessInfo mapProcess(OSProcess p) {
-        return new ProcessMonitoringData.ProcessInfo(
+    private ProcessInfo mapProcess(OSProcess p) {
+        System.out.println("Mapping process for client: " + p.getResidentSetSize());
+        return new ProcessInfo(
                 p.getProcessID(),
                 p.getName(),
-                p.getResidentSetSize() / 1024, // in KB
+                p.getResidentSetSize(), // in KB
                 p.getProcessCpuLoadCumulative() * 100,
                 p.getCommandLine()
         );
     }
 
-    private List<ProcessMonitoringData.ProcessInfo> removeDuplicatesByName(List<ProcessMonitoringData.ProcessInfo> processes) {
+    private List<ProcessInfo> removeDuplicatesByName(List<ProcessInfo> processes) {
 
-        Map<String, ProcessMonitoringData.ProcessInfo> uniqueByName = new LinkedHashMap<>();
+        Map<String, ProcessInfo> uniqueByName = new LinkedHashMap<>();
 
-        for (ProcessMonitoringData.ProcessInfo process : processes) {
+        for (ProcessInfo process : processes) {
             uniqueByName.putIfAbsent(
-                    process.processName.toLowerCase(),
+                    process.getProcessName().toLowerCase(),
                     process
             );
         }

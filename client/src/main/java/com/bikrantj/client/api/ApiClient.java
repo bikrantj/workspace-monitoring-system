@@ -2,11 +2,12 @@ package com.bikrantj.client.api;
 
 import com.bikrantj.shared.dto.User;
 import com.bikrantj.shared.model.Client;
+import com.bikrantj.shared.model.ProcessInfo;
 import com.bikrantj.shared.model.Workspace;
 import com.bikrantj.shared.requests.*;
+import com.bikrantj.shared.responses.ActivityPoint;
 import com.bikrantj.shared.responses.HighRamProcessUsage;
 import com.bikrantj.shared.responses.LoginResponse;
-import com.bikrantj.shared.responses.WorkspaceActivityPoint;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.List;
@@ -47,11 +48,11 @@ public class ApiClient {
         http.post("/monitoring/ingest", payload, Void.class);
     }
 
-    public List<WorkspaceActivityPoint> getWorkspaceActivity(String workspaceId) throws ApiException {
+    public List<ActivityPoint> getWorkspaceActivity(String workspaceId) throws ApiException {
         return http
                 .getGeneric(
                         "/workspace/" + workspaceId + "/metrics/activity",
-                        new TypeReference<List<WorkspaceActivityPoint>>() {
+                        new TypeReference<List<ActivityPoint>>() {
                         }
                 );
     }
@@ -76,5 +77,35 @@ public class ApiClient {
                 );
 
 
+    }
+
+
+    //        app.get("/workspace/{workspaceId}/client/{clientId}/metrics/activity", metricsController::getClientActivity);
+    public List<ActivityPoint> getClientActivity(String workspaceId, String clientId) {
+        try {
+            return http
+                    .getGeneric(
+                            "/workspace/" + workspaceId + "/client/" + clientId + "/metrics/activity",
+                            new TypeReference<List<ActivityPoint>>() {
+                            }
+                    );
+        } catch (ApiException e) {
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+
+    public List<ProcessInfo> getLatestProcesses(String workspaceId, String clientId) {
+        try {
+            return http
+                    .getGeneric(
+                            "/workspace/" + workspaceId + "/client/" + clientId + "/metrics/latest-processes",
+                            new TypeReference<List<ProcessInfo>>() {
+                            }
+                    );
+        } catch (ApiException e) {
+            e.printStackTrace();
+            return List.of();
+        }
     }
 }

@@ -3,7 +3,7 @@ package com.bikrantj.client.controllers;
 import com.bikrantj.client.AppContext;
 import com.bikrantj.client.navigation.ContentNavigationManager;
 import com.bikrantj.client.navigation.Screens;
-import com.bikrantj.shared.responses.WorkspaceActivityPoint;
+import com.bikrantj.shared.responses.ActivityPoint;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -66,13 +66,13 @@ public class WorkspaceController implements Initializable {
      */
     private void loadActivityCard(String workspaceId) {
         try {
-            List<WorkspaceActivityPoint> points =
+            List<ActivityPoint> points =
                     AppContext.getApiClient().getWorkspaceActivity(workspaceId);
 
             XYChart.Series<String, Number> series = new XYChart.Series<>();
             series.setName("Workspace Activity");
 
-            for (WorkspaceActivityPoint p : points) {
+            for (ActivityPoint p : points) {
                 series.getData().add(
                         new XYChart.Data<>(p.getTime(), p.getCount())
                 );

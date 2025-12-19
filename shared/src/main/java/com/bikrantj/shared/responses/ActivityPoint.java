@@ -1,15 +1,15 @@
 package com.bikrantj.shared.responses;
 
 
-public class WorkspaceActivityPoint {
+public class ActivityPoint {
 
     private String time;
     private int count;
 
-    public WorkspaceActivityPoint() {
+    public ActivityPoint() {
     }
 
-    public WorkspaceActivityPoint(String time, int count) {
+    public ActivityPoint(String time, int count) {
         this.time = time;
         this.count = count;
     }

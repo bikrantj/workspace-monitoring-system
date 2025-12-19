@@ -41,15 +41,7 @@ public class ConsoleMonitoringTransport implements MonitoringTransport {
     private void logProcesses(ProcessMonitoringData pm) {
         System.out.println("=== Process Snapshot @ " + pm.timestamp + " ===");
 
-        pm.getProcesses().forEach(p ->
-                System.out.printf(
-                        "PID=%d | NAME=%s | CPU=%.2f | MEM=%d%n",
-                        p.processId,
-                        p.processName,
-                        p.cpuUsage,
-                        p.memoryUsage
-                )
-        );
+       
     }
 
     private void saveScreenshot(ScreenshotMonitoringData sm) {

@@ -1,11 +1,13 @@
 package com.bikrantj.repositories;
 
+import com.bikrantj.shared.model.ProcessInfo;
+import com.bikrantj.shared.responses.ActivityPoint;
 import com.bikrantj.shared.responses.HighRamProcessUsage;
-import com.bikrantj.shared.responses.WorkspaceActivityPoint;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,8 @@ public class MetricsRepo {
         this.con = con;
     }
 
-    public List<WorkspaceActivityPoint> getWorkspaceActivityLast24Hours(
+
+    public List<ActivityPoint> getWorkspaceActivityLast24Hours(
             String workspaceId
     ) {
 
@@ -32,7 +35,7 @@ public class MetricsRepo {
                     ORDER BY time_bucket;
                 """;
 
-        List<WorkspaceActivityPoint> result = new ArrayList<>();
+        List<ActivityPoint> result = new ArrayList<>();
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -41,7 +44,7 @@ public class MetricsRepo {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     result.add(
-                            new WorkspaceActivityPoint(
+                            new ActivityPoint(
                                     rs.getString("time_bucket"),
                                     rs.getInt("activity_count")
                             )
@@ -49,6 +52,69 @@ public class MetricsRepo {
                 }
             }
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public List<ProcessInfo> getLatestProcessesForClient(String workspaceId, String clientId) {
+        String sql = """
+                SELECT 
+                    p.id,
+                    p.snapshot_id AS snapshotId,
+                    p.client_id AS clientId,
+                    p.workspace_id AS workspaceId,
+                    p.process_name AS processName,
+                    p.process_id AS processId,
+                    p.memory_usage AS memoryUsage,
+                    p.cpu_usage AS cpuUsage,
+                    p.window_title AS windowTitle,
+                    p.collected_at AS collectedAt
+                FROM processes p
+                JOIN monitoring_snapshots ms ON p.snapshot_id = ms.id
+                WHERE ms.workspace_id = ?
+                  AND ms.client_id = ?
+                  AND ms.id = (
+                      SELECT id 
+                      FROM monitoring_snapshots 
+                      WHERE workspace_id = ? 
+                        AND client_id = ?
+                      ORDER BY collected_at DESC 
+                      LIMIT 1
+                  )
+                ORDER BY p.memory_usage DESC;
+                """;
+
+        List<ProcessInfo> result = new ArrayList<>();
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, workspaceId);
+            ps.setString(2, clientId);
+            ps.setString(3, workspaceId);
+            ps.setString(4, clientId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ProcessInfo info = new ProcessInfo();
+                    info.setId(rs.getString("id"));
+                    info.setSnapshotId(rs.getString("snapshotId"));
+                    info.setClientId(rs.getString("clientId"));
+                    info.setWorkspaceId(rs.getString("workspaceId"));
+                    info.setProcessName(rs.getString("processName"));
+                    info.setProcessId(rs.getInt("processId"));
+                    System.out.println("IN REPOSITORY: MEMORY USAGE = " + rs.getLong("memoryUsage"));
+                    info.setMemoryUsage(rs.getLong("memoryUsage"));
+                    info.setCpuUsage(rs.getDouble("cpuUsage"));
+                    info.setWindowTitle(rs.getString("windowTitle"));
+                    // Handle timestamp if needed
+                    Timestamp ts = rs.getTimestamp("collectedAt");
+                    info.setCollectedAt(ts);
+
+                    result.add(info);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,6 +167,48 @@ public class MetricsRepo {
                                     rs.getString("process_name"),
                                     rs.getLong("avg_memory"),
                                     rs.getDouble("avg_cpu")
+                            )
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public List<ActivityPoint> getClientActivityLast24Hours(
+            String workspaceId,
+            String clientId
+    ) {
+
+        String sql = """
+                    SELECT
+                        DATE_FORMAT(collected_at, '%H:%i') AS time_bucket,
+                        COUNT(*) AS activity_count
+                    FROM monitoring_snapshots
+                    WHERE workspace_id = ?
+                      AND client_id = ?
+                      AND collected_at >= NOW() - INTERVAL 24 HOUR
+                    GROUP BY time_bucket
+                    ORDER BY time_bucket;
+                """;
+
+        List<ActivityPoint> result = new ArrayList<>();
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, workspaceId);
+            ps.setString(2, clientId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    result.add(
+                            new ActivityPoint(
+                                    rs.getString("time_bucket"),
+                                    rs.getInt("activity_count")
                             )
                     );
                 }

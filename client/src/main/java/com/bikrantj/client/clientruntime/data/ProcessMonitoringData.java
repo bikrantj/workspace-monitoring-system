@@ -1,5 +1,7 @@
 package com.bikrantj.client.clientruntime.data;
 
+import com.bikrantj.shared.model.ProcessInfo;
+
 import java.time.Instant;
 import java.util.List;
 
@@ -21,25 +23,5 @@ public class ProcessMonitoringData extends MonitoringData {
         return processes;
     }
 
-    public static class ProcessInfo {
-        public final int processId;
-        public final String processName;
-        public final long memoryUsage;
-        public final double cpuUsage;
-        public final String windowTitle;
 
-        public ProcessInfo(
-                int processId,
-                String processName,
-                long memoryUsage,
-                double cpuUsage,
-                String windowTitle
-        ) {
-            this.processId = processId;
-            this.processName = processName;
-            this.memoryUsage = memoryUsage;
-            this.cpuUsage = cpuUsage;
-            this.windowTitle = windowTitle;
-        }
-    }
 }

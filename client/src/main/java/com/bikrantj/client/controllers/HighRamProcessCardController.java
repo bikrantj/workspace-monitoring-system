@@ -17,7 +17,7 @@ public class HighRamProcessCardController {
 
         processNameLabel.setText(data.getProcessName());
         ramLabel.setText(
-                "Avg RAM: " + (data.getAvgMemoryUsage() / (1024)) + " MB"
+                "Avg RAM: " + (data.getAvgMemoryUsage() / (1024 * 1024)) + " MB"
         );
         cpuLabel.setText(
                 "Avg CPU: " + String.format("%.2f", data.getAvgCpuUsage()) + "%"

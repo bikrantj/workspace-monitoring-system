@@ -76,11 +76,11 @@ public class ApiMonitoringTransport implements MonitoringTransport {
         List<ProcessPayload> processPayloads = new ArrayList<>();
         processData.getProcesses().forEach(p -> {
             ProcessPayload pp = new ProcessPayload();
-            pp.setProcessName(p.processName);
-            pp.setProcessId(p.processId);
-            pp.setMemoryUsage(p.memoryUsage);
-            pp.setCpuUsage(p.cpuUsage);
-            pp.setWindowTitle(p.windowTitle);
+            pp.setProcessName(p.getProcessName());
+            pp.setProcessId(p.getProcessId());
+            pp.setMemoryUsage(p.getMemoryUsage());
+            pp.setCpuUsage(p.getCpuUsage());
+            pp.setWindowTitle(p.getWindowTitle());
             processPayloads.add(pp);
         });
 
