@@ -13,6 +13,9 @@ public class Screenshot {
     private long fileSize;
     private Instant captureTime;
 
+    public Screenshot() {
+    }
+
     public Screenshot(
             String id,
             String snapshotId,

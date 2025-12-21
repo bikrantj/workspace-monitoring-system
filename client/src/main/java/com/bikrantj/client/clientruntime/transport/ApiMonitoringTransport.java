@@ -6,6 +6,7 @@ import com.bikrantj.client.clientruntime.data.MonitoringData;
 import com.bikrantj.client.clientruntime.data.ProcessMonitoringData;
 import com.bikrantj.client.clientruntime.data.ScreenshotMonitoringData;
 import com.bikrantj.client.clientruntime.monitoring.MonitoringContext;
+import com.bikrantj.client.clientruntime.storage.StorageService;
 import com.bikrantj.shared.requests.MonitoringPayload;
 import com.bikrantj.shared.requests.ProcessPayload;
 import com.bikrantj.shared.requests.ScreenshotPayload;
@@ -45,11 +46,24 @@ public class ApiMonitoringTransport implements MonitoringTransport {
         }
 
         // 2️⃣ Build payload
-        MonitoringPayload payload = buildPayload(screenshot, processData);
 
-        // 3️⃣ Send to server
         try {
+            // 1️⃣ Save screenshot LOCALLY on client
+            String savedPath =
+                    StorageService.saveScreenshot(
+                            context.getWorkspaceId(),
+                            context.getClientId(),
+                            screenshot.timestamp,
+                            screenshot.getImageBytes()
+                    );
+
+            // 2️⃣ Build payload using local path
+            MonitoringPayload payload =
+                    buildPayload(screenshot, processData, savedPath);
+
+            // 3️⃣ Send metadata only
             apiClient.sendMonitoringSnapshot(payload);
+
         } catch (Exception e) {
             System.err.println("Failed to send monitoring snapshot: " + e.getMessage());
         }
@@ -57,7 +71,7 @@ public class ApiMonitoringTransport implements MonitoringTransport {
 
     private MonitoringPayload buildPayload(
             ScreenshotMonitoringData screenshot,
-            ProcessMonitoringData processData
+            ProcessMonitoringData processData, String savedPath
     ) {
         MonitoringPayload payload = new MonitoringPayload();
 
@@ -67,7 +81,7 @@ public class ApiMonitoringTransport implements MonitoringTransport {
         // Fake screenshot URL for now
         ScreenshotPayload screenshotPayload = new ScreenshotPayload();
         screenshotPayload.setFilePath(
-                "https://fake-fileserver/screenshots/" + screenshot.timestamp + ".png"
+                savedPath
         );
         screenshotPayload.setFileSize(screenshot.getImageBytes().length);
 

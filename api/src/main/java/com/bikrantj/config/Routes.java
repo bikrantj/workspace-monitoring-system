@@ -60,6 +60,7 @@ public class Routes {
         app.get("/workspace/{workspaceId}/metrics/activity", metricsController::getWorkspaceActivity);
         app.get("/workspace/{workspaceId}/client/{clientId}/metrics/activity", metricsController::getClientActivity);
         app.get("/workspace/{workspaceId}/client/{clientId}/metrics/latest-processes", metricsController::getLatestProcessesForClient);
+        app.get("/workspace/{workspaceId}/client/{clientId}/screenshot/latest", metricsController::getScreenshotForClient);
         // Health check
         app.get("/health", ctx -> ctx.json(Map.of("status", "healthy")));
 

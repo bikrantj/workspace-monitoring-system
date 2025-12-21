@@ -3,6 +3,7 @@ package com.bikrantj.client.api;
 import com.bikrantj.shared.dto.User;
 import com.bikrantj.shared.model.Client;
 import com.bikrantj.shared.model.ProcessInfo;
+import com.bikrantj.shared.model.Screenshot;
 import com.bikrantj.shared.model.Workspace;
 import com.bikrantj.shared.requests.*;
 import com.bikrantj.shared.responses.ActivityPoint;
@@ -106,6 +107,19 @@ public class ApiClient {
         } catch (ApiException e) {
             e.printStackTrace();
             return List.of();
+        }
+    }
+
+    public Screenshot getLatestSceenshot(String workspaceId, String clientId) {
+        try {
+            return http
+                    .get(
+                            "/workspace/" + workspaceId + "/client/" + clientId + "/screenshot/latest",
+                            Screenshot.class
+                    );
+        } catch (ApiException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

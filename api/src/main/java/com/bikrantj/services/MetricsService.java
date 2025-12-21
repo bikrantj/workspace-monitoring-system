@@ -2,6 +2,7 @@ package com.bikrantj.services;
 
 import com.bikrantj.repositories.MetricsRepo;
 import com.bikrantj.shared.model.ProcessInfo;
+import com.bikrantj.shared.model.Screenshot;
 import com.bikrantj.shared.responses.ActivityPoint;
 import com.bikrantj.shared.responses.HighRamProcessUsage;
 
@@ -43,5 +44,9 @@ public class MetricsService {
                 snapshotLimit,
                 topN
         );
+    }
+
+    public Screenshot getScreenshotForClient(String workspaceId, String clientId) {
+        return metricsRepo.getLatestScreenshotForClient(workspaceId, clientId);
     }
 }

@@ -2,6 +2,7 @@ package com.bikrantj.controllers;
 
 import com.bikrantj.services.MetricsService;
 import com.bikrantj.shared.model.ProcessInfo;
+import com.bikrantj.shared.model.Screenshot;
 import com.bikrantj.shared.responses.ActivityPoint;
 import com.bikrantj.shared.responses.HighRamProcessUsage;
 import io.javalin.http.Context;
@@ -85,6 +86,23 @@ public class MetricsController {
 
         ctx.json(points);
     }
+
+    public void getScreenshotForClient(Context ctx) {
+
+        String workspaceId = ctx.pathParam("workspaceId");
+        String clientId = ctx.pathParam("clientId");
+
+        if (workspaceId.isBlank() || clientId.isBlank()) {
+            ctx.status(400).json("workspaceId and clientId are required");
+            return;
+        }
+
+        Screenshot screenshot =
+                metricsService.getScreenshotForClient(workspaceId, clientId);
+
+        ctx.json(screenshot);
+    }
+
 
     public void getWorkspaceActivity(Context ctx) {
         String workspaceId = ctx.pathParam("workspaceId");

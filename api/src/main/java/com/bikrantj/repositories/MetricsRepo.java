@@ -1,6 +1,7 @@
 package com.bikrantj.repositories;
 
 import com.bikrantj.shared.model.ProcessInfo;
+import com.bikrantj.shared.model.Screenshot;
 import com.bikrantj.shared.responses.ActivityPoint;
 import com.bikrantj.shared.responses.HighRamProcessUsage;
 
@@ -219,5 +220,43 @@ public class MetricsRepo {
         }
 
         return result;
+    }
+
+    public Screenshot getLatestScreenshotForClient(String workspaceId, String clientId) {
+        String sql = """
+                SELECT 
+                    id,
+                    client_id AS clientId,
+                    workspace_id AS workspaceId,
+                    file_path AS filePath,
+                    file_size AS fileSize
+                FROM screenshots
+                WHERE workspace_id = ?
+                  AND client_id = ?
+                ORDER BY capture_time DESC
+                LIMIT 1;
+                """;
+
+        Screenshot screenshot = null;
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, workspaceId);
+            ps.setString(2, clientId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    screenshot = new Screenshot();
+                    screenshot.setId(rs.getString("id"));
+                    screenshot.setClientId(rs.getString("clientId"));
+                    screenshot.setWorkspaceId(rs.getString("workspaceId"));
+                    screenshot.setFilePath(rs.getString("filePath"));
+                    screenshot.setFileSize(rs.getLong("fileSize"));
+                }
+            }
+            return screenshot;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
