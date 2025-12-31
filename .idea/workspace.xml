@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="33083603-5f2d-43fc-a936-f821030df9ce" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/data_source_mapping.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/data_source_mapping.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/controllers/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/MetricsRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/MetricsRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/ScreenshotRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/ScreenshotRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/services/MonitoringService.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/services/MonitoringService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/ClientApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/api/ApiException.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/api/ApiException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/api/HttpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/api/HttpService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/AdminRegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/AdminRegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/DeviceCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/DeviceCardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/DeviceDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/DeviceDetailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/com/bikrantj/client/device-detail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/com/bikrantj/client/device-detail.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/com/bikrantj/shared/model/ProcessInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/com/bikrantj/shared/model/ProcessInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/com/bikrantj/shared/model/Screenshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/com/bikrantj/shared/model/Screenshot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/module-info.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="module-info" />
+        <option value="Record" />
+        <option value="Enum" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="35n8WAgavKTlUlLajWwauiyqWnJ" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.ApiServer.executor": "Run",
+    "Application.Launcher.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.api.executor": "Run",
+    "Application.client.executor": "Run",
+    "Application.server.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Java Projects/fourthsem/pom.xml",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "D:/Java Projects/fourthsem/shared/src/main/java/com/bikrantj/shared/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.bikrantj.client.api.requests" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Java Projects\fourthsem\client\src\main\resources\com\bikrantj\client" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.bikrantj.shared.model" />
+      <recent name="com.bikrantj.shared.requests" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.server">
+    <configuration name="client" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="temurin-21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.bikrantj.client.Launcher" />
+      <module name="client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="server" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="temurin-21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.bikrantj.ApiServer" />
+      <module name="api" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.client" />
+      <item itemvalue="Application.server" />
+    </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="33083603-5f2d-43fc-a936-f821030df9ce" name="Changes" comment="" />
+      <created>1763734504356</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1763734504356</updated>
+      <workItem from="1763734505308" duration="6981000" />
+      <workItem from="1763790118757" duration="34000" />
+      <workItem from="1764000434406" duration="170000" />
+      <workItem from="1764061520321" duration="16082000" />
+      <workItem from="1764473059756" duration="875000" />
+      <workItem from="1764599605765" duration="1932000" />
+      <workItem from="1764865370694" duration="106000" />
+      <workItem from="1765646801819" duration="77000" />
+      <workItem from="1765713721642" duration="8359000" />
+      <workItem from="1765874188164" duration="21546000" />
+      <workItem from="1766066708188" duration="2136000" />
+      <workItem from="1766070739684" duration="221000" />
+      <workItem from="1766071189074" duration="5301000" />
+      <workItem from="1766115998416" duration="534000" />
+      <workItem from="1766116552242" duration="378000" />
+      <workItem from="1766145922220" duration="7536000" />
+      <workItem from="1766287167670" duration="3577000" />
+      <workItem from="1767173022225" duration="1680000" />
+      <workItem from="1767175971462" duration="372000" />
+      <workItem from="1767176353667" duration="247000" />
+      <workItem from="1767176619729" duration="139000" />
+      <workItem from="1767176784304" duration="333000" />
+      <workItem from="1767177134502" duration="3857000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/bikrantj/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/shared/src/main/java/com/bikrantj/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/shared/src/main/java/com/bikrantj/shared/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>

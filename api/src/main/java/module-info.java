@@ -5,4 +5,5 @@ module com.bikrantj {
     requires java.sql;
     requires com.fasterxml.jackson.databind;
     requires annotations;
+
 }

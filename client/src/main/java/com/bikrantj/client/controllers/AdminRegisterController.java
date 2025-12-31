@@ -32,10 +32,10 @@ public class AdminRegisterController {
         try {
             api.registerUser(request);
             System.out.println("Registration successful!");
-            Toast.success(getPane(), "Registration successful! Please login.");
+            Toast.success(rootPane, "Registration successful! Please login.");
             NavigationManager.navigateTo(Screens.ADMIN_LOGIN);
         } catch (ApiException e) {
-            Toast.error(getPane(), "Email already exists");
+            Toast.error(rootPane, e.getServerMessage());
             System.out.println("Registration failed: " + e.getMessage());
 //            throw new RuntimeException(e);
         }
@@ -53,5 +53,5 @@ public class AdminRegisterController {
     public void onBackToHomeClicked(MouseEvent mouseEvent) {
         NavigationManager.navigateTo(Screens.INITIAL_VIEW);
     }
-    
+
 }

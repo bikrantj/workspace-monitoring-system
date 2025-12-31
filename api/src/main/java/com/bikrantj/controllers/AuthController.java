@@ -21,12 +21,43 @@ public class AuthController {
 
     // REGISTER
 
+    private static boolean isValidEmail(String email) {
+        if (email == null) {
+            return false;
+        }
+
+        // RFC 5322 compliant pattern (practical subset - very good balance)
+        String emailRegex =
+                "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?" +
+                        "(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
+
+        return email.matches(emailRegex);
+    }
+
     public void register(Context ctx) {
-        RegisterRequest req = ctx.bodyValidator(RegisterRequest.class)
-                .check(r -> r.getUsername() != null && !r.getUsername().trim().isEmpty(), "Username is required")
-                .check(r -> r.getPassword() != null && !r.getPassword().trim().isEmpty(), "Password is required")
-                .check(r -> r.getEmail() != null && !r.getEmail().trim().isEmpty(), "Email is required")
-                .get();
+        RegisterRequest req = ctx.bodyAsClass(RegisterRequest.class);
+        if (req.getUsername() == null || req.getUsername().trim().isEmpty() ||
+                req.getPassword() == null || req.getPassword().trim().isEmpty() ||
+                req.getEmail() == null || req.getEmail().trim().isEmpty()) {
+            ctx.status(HttpStatus.BAD_REQUEST)
+                    .json("Username, password, and email are required");
+            return;
+        }
+
+        if (!isValidEmail(req.getEmail().trim())) {
+            System.out.println("Invalid email format: " + req.getEmail().trim());
+            ctx.status(HttpStatus.BAD_REQUEST)
+                    .json("Invalid email format");
+            return;
+        }
+
+        if (req.getPassword().length() < 8) {
+            ctx.status(HttpStatus.BAD_REQUEST)
+                    .json("Password must be at least 8 characters long");
+            return;
+        }
+
+        System.out.println("Valid email format: " + req.getEmail().trim());
 
         boolean success = workspaceAdminService.register(
                 req.getUsername().trim(),
@@ -39,7 +70,7 @@ public class AuthController {
                     .json(Map.of("message", "Admin registered successfully"));
         } else {
             ctx.status(HttpStatus.BAD_REQUEST)
-                    .json(Map.of("error", "Email already exists"));
+                    .json("Email already in use");
         }
     }
 

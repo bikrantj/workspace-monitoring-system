@@ -111,8 +111,8 @@ public class MetricsRepo {
                     info.setWindowTitle(rs.getString("windowTitle"));
                     // Handle timestamp if needed
                     Timestamp ts = rs.getTimestamp("collectedAt");
-                    info.setCollectedAt(ts);
-
+                    info.setCollectedAt(ts != null ?
+                            new java.text.SimpleDateFormat("yyyy-MM-dd").format(ts) : null);
                     result.add(info);
                 }
             }
@@ -229,7 +229,8 @@ public class MetricsRepo {
                     client_id AS clientId,
                     workspace_id AS workspaceId,
                     file_path AS filePath,
-                    file_size AS fileSize
+                    file_size AS fileSize,
+                 capture_time AS captureTime
                 FROM screenshots
                 WHERE workspace_id = ?
                   AND client_id = ?
@@ -251,6 +252,10 @@ public class MetricsRepo {
                     screenshot.setWorkspaceId(rs.getString("workspaceId"));
                     screenshot.setFilePath(rs.getString("filePath"));
                     screenshot.setFileSize(rs.getLong("fileSize"));
+                    // Convert DB timestamp → Instant → formatted string
+                    Timestamp ts = rs.getTimestamp("captureTime");
+                    screenshot.setCaptureTime(ts != null ?
+                            new java.text.SimpleDateFormat("yyyy-MM-dd").format(ts) : null);
                 }
             }
             return screenshot;

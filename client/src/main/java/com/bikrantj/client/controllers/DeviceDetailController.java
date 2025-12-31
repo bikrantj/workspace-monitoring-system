@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
@@ -27,6 +28,7 @@ import java.util.Map;
 
 public class DeviceDetailController {
 
+    public Label screenshotTimestampLabel;
     @FXML
     private ImageView latestScreenshotView;
     @FXML
@@ -135,6 +137,7 @@ public class DeviceDetailController {
             if (screenshot == null || screenshot.getFilePath() == null) {
                 return;
             }
+            screenshotTimestampLabel.setText(screenshot.getCaptureTime());
 
             String imageUrl = "http://localhost" + screenshot.getFilePath();
             System.out.println("Loading screenshot from URL: " + imageUrl);

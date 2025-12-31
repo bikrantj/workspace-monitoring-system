@@ -1,8 +1,6 @@
 package com.bikrantj.shared.model;
 
 
-import java.sql.Timestamp;
-
 public class ProcessInfo {
 
     private String id;
@@ -14,7 +12,7 @@ public class ProcessInfo {
     private long memoryUsage;
     private double cpuUsage;
     private String windowTitle;
-    private Timestamp collectedAt;
+    private String collectedAt;
     private double memoryUsageMB;
 
     public ProcessInfo() {
@@ -30,7 +28,7 @@ public class ProcessInfo {
             long memoryUsage,
             double cpuUsage,
             String windowTitle,
-            Timestamp collectedAt
+            String collectedAt
     ) {
         this.id = id;
         this.snapshotId = snapshotId;
@@ -142,11 +140,11 @@ public class ProcessInfo {
         this.windowTitle = windowTitle;
     }
 
-    public Timestamp getCollectedAt() {
+    public String getCollectedAt() {
         return collectedAt;
     }
 
-    public void setCollectedAt(Timestamp collectedAt) {
+    public void setCollectedAt(String collectedAt) {
         this.collectedAt = collectedAt;
     }
 

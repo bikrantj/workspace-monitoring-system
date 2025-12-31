@@ -30,6 +30,7 @@ public class DeviceCardController {
 
         nameLabel.setText(client.getClientName());
         osLabel.setText(client.getOsInfo());
+        System.out.println("Client Status: " + client.getStatus());
         statusLabel.setText(client.getStatus().name());
 
         Map<String, Object> params = new HashMap<>();

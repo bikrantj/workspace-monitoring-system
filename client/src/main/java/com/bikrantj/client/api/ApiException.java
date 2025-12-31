@@ -2,29 +2,14 @@ package com.bikrantj.client.api;
 
 
 public class ApiException extends Exception {
-    private final int statusCode;
+    private final String serverMessage;
 
-    public ApiException(String message) {
+    public ApiException(String message, String serverMessage) {
         super(message);
-        this.statusCode = 0;
+        this.serverMessage = serverMessage;
     }
 
-    public ApiException(String message, int statusCode) {
-        super(message);
-        this.statusCode = statusCode;
-    }
-
-    public ApiException(String message, Throwable cause) {
-        super(message, cause);
-        this.statusCode = 0;
-    }
-
-    public ApiException(int statusCode, String message) {
-        super(message);
-        this.statusCode = statusCode;
-    }
-
-    public int getStatusCode() {
-        return statusCode;
+    public String getServerMessage() {
+        return serverMessage;
     }
 }

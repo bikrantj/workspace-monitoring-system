@@ -79,7 +79,7 @@ public class HttpService {
             addAuthHeader(builder);
             return builder.build();
         } catch (Exception e) {
-            throw new ApiException("Failed to serialize request body", e);
+            throw new ApiException("Failed to serialize request body", "Failed to serialize request body");
         }
     }
 
@@ -101,19 +101,27 @@ public class HttpService {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             String body = response.body();
 
-            if (response.statusCode() >= 200 && response.statusCode() < 300) {
+            int statusCode = response.statusCode();
+
+            if (statusCode >= 200 && statusCode < 300) {
                 if (body == null || body.trim().isEmpty()) {
                     return null;
                 }
                 return mapper.readValue(body, javaType);
             } else {
-                throw new ApiException("HTTP " + response.statusCode() + ": " + body);
+                // Server responded with error status (400, 401, 403, 404, 500, etc.)
+                String errorBody = body != null && !body.trim().isEmpty() ? body.trim() : "Error " + response.statusCode();
+                throw new ApiException(errorBody, "");
             }
+
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            throw new ApiException("Request interrupted", e);
+            throw new ApiException("Request interrupted", "The request was interrupted");
+
         } catch (Exception e) {
-            throw new ApiException("Request failed: " + e.getMessage(), e);
+            // Network-level failure (no response from server at all)
+            String msg = e.getMessage() != null ? e.getMessage() : "Unknown network error";
+            throw new ApiException("Request failed", msg);
         }
     }
 

@@ -47,7 +47,7 @@ public class ScreenshotRepo {
                     workspaceId,
                     filePath,
                     fileSize,
-                    Instant.now()
+                    Instant.now().toString()
             );
 
         } catch (Exception e) {

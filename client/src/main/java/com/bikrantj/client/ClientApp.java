@@ -60,7 +60,7 @@ public class ClientApp extends Application {
         try {
             User profile = AppContext.getApiClient().getCurrentUser();
             if (profile == null) {
-                throw new ApiException("Invalid token");
+                throw new ApiException("Invalid token", "Invalid Token");
             }
 
             UserSession.setUser(profile, savedToken);

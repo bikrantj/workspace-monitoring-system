@@ -1,8 +1,5 @@
 package com.bikrantj.shared.model;
 
-
-import java.time.Instant;
-
 public class Screenshot {
 
     private String id;
@@ -11,7 +8,7 @@ public class Screenshot {
     private String workspaceId;
     private String filePath;
     private long fileSize;
-    private Instant captureTime;
+    private String captureTime;       // ISO-8601 string or simple date string - your choice
 
     public Screenshot() {
     }
@@ -23,7 +20,7 @@ public class Screenshot {
             String workspaceId,
             String filePath,
             long fileSize,
-            Instant captureTime
+            String captureTime
     ) {
         this.id = id;
         this.snapshotId = snapshotId;
@@ -33,6 +30,8 @@ public class Screenshot {
         this.fileSize = fileSize;
         this.captureTime = captureTime;
     }
+
+    // Getters and setters
 
     public String getId() {
         return id;
@@ -82,12 +81,11 @@ public class Screenshot {
         this.fileSize = fileSize;
     }
 
-    public Instant getCaptureTime() {
-        return captureTime;
+    public String getCaptureTime() {
+        return captureTime != null ? captureTime : "";
     }
 
-    public void setCaptureTime(Instant captureTime) {
+    public void setCaptureTime(String captureTime) {
         this.captureTime = captureTime;
     }
-    // getters only (immutability is fine here)
 }
