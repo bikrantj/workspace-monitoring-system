@@ -3,6 +3,7 @@ package com.bikrantj.services;
 import com.bikrantj.repositories.ClientRepo;
 import com.bikrantj.shared.model.Client;
 import com.bikrantj.shared.model.Workspace;
+import com.bikrantj.shared.responses.ClientListView;
 
 import java.util.List;
 
@@ -32,6 +33,14 @@ public class ClientService {
 //        Check if the workspace is valid before registering the client
         // Registration logic here
         return clientRepo.create(c);
+    }
+
+    public List<ClientListView> getAllDevicesForAdmin(String adminId) {
+        return clientRepo.findAllDevicesForAdmin(adminId);
+    }
+
+    public boolean deleteClientForAdmin(String clientId, String adminId) {
+        return clientRepo.deleteClientForAdmin(clientId, adminId);
     }
 
     public Client isClientInWorkspace(String clientIdentifier, String workspaceId) {

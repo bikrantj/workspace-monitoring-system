@@ -26,7 +26,7 @@ public class Routes {
         AuthController authController = new AuthController(workspaceAdminService);
         WorkspaceController workspaceController = new WorkspaceController(workspaceAdminService, workspaceService);
         ClientAuthController clientAuthController = new ClientAuthController(clientService);
-        ClientController clientController = new ClientController(clientService);
+        ClientController clientController = new ClientController(clientService, workspaceAdminService);
 
         ScreenshotRepo screenshotRepo = new ScreenshotRepo(con);
         SnapshotRepo snapshotRepo = new SnapshotRepo(con);
@@ -44,6 +44,8 @@ public class Routes {
 
 //        Client routes
         app.post("/client/login", clientAuthController::login);
+        app.get("/api/admin/devices", clientController::getAllDevices);
+        app.post("/api/admin/device", clientController::deleteDevice);
 
 
 //        Workspace routes

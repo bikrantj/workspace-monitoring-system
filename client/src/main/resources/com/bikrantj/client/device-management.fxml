@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/21"
+            fx:id="rootPane"
+            fx:controller="com.bikrantj.client.controllers.DeviceManagementController"
+            style="-fx-background-color: #f8f9fc;">
+
+    <ScrollPane AnchorPane.topAnchor="0"
+                AnchorPane.bottomAnchor="0"
+                AnchorPane.leftAnchor="0"
+                AnchorPane.rightAnchor="0"
+                fitToWidth="true"
+                hbarPolicy="NEVER"
+                style="-fx-background-color: transparent;">
+
+        <VBox spacing="24"
+              style="-fx-padding: 30;">
+
+            <!-- Header -->
+            <Label text="Device Management"
+                   style="-fx-text-fill: #2d3748;
+                          -fx-font-size: 26;
+                          -fx-font-weight: bold;"/>
+
+            <!-- Device Cards Container -->
+            <FlowPane fx:id="deviceContainer"
+                      hgap="20"
+                      vgap="20"
+                      prefWrapLength="1000"/>
+
+        </VBox>
+    </ScrollPane>
+
+</AnchorPane>

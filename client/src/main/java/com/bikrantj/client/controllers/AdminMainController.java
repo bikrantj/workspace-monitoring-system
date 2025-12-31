@@ -34,4 +34,8 @@ public class AdminMainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ContentNavigationManager.initialize(mainBorderPane);
     }
+
+    public void onDeviceManagementClicked(ActionEvent actionEvent) {
+        ContentNavigationManager.navigateTo(Screens.DEVICE_MANAGEMENT, null);
+    }
 }

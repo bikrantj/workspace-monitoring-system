@@ -5,28 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33083603-5f2d-43fc-a936-f821030df9ce" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/DeviceManagementController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/com/bikrantj/client/device-management.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/resources/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/com/bikrantj/shared/requests/DeleteClientRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/com/bikrantj/shared/responses/ClientListView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/data_source_mapping.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/data_source_mapping.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/controllers/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/MetricsRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/MetricsRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/ScreenshotRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/ScreenshotRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/services/MonitoringService.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/services/MonitoringService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/config/Routes.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/config/Routes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/controllers/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/controllers/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/ClientRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/repositories/ClientRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/services/ClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/com/bikrantj/services/ClientService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/ClientApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/api/ApiException.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/api/ApiException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/api/HttpService.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/api/HttpService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/AdminRegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/AdminRegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/DeviceCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/DeviceCardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/DeviceDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/DeviceDetailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/com/bikrantj/client/device-detail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/com/bikrantj/client/device-detail.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/com/bikrantj/shared/model/ProcessInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/com/bikrantj/shared/model/ProcessInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/com/bikrantj/shared/model/Screenshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/com/bikrantj/shared/model/Screenshot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/api/ApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/api/ApiClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/AdminMainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/controllers/AdminMainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/navigation/Screens.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/bikrantj/client/navigation/Screens.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/com/bikrantj/client/admin-dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/com/bikrantj/client/admin-dashboard.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +76,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Java Projects/fourthsem/pom.xml",
+    "last_opened_file_path": "D:/Java Projects/fourthsem/client/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -107,6 +101,7 @@
       <recent name="com.bikrantj.client.api.requests" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Java Projects\fourthsem\client\src\main\resources" />
       <recent name="D:\Java Projects\fourthsem\client\src\main\resources\com\bikrantj\client" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -175,7 +170,7 @@
       <workItem from="1767176353667" duration="247000" />
       <workItem from="1767176619729" duration="139000" />
       <workItem from="1767176784304" duration="333000" />
-      <workItem from="1767177134502" duration="3857000" />
+      <workItem from="1767177134502" duration="7769000" />
     </task>
     <servers />
   </component>

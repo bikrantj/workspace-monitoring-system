@@ -1,6 +1,7 @@
 package com.bikrantj.repositories;
 
 import com.bikrantj.shared.model.Client;
+import com.bikrantj.shared.responses.ClientListView;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -104,6 +105,75 @@ public class ClientRepo {
 
         return null;
     }
+
+    public List<ClientListView> findAllDevicesForAdmin(String adminId) {
+
+        String sql = """
+                    SELECT
+                        c.id               AS client_id,
+                        c.client_name,
+                        c.last_ip_address,
+                        c.os_info,
+                        c.status,
+                        c.last_heartbeat,
+                        w.name             AS workspace_name
+                    FROM clients c
+                    JOIN workspaces w ON c.workspace_id = w.uniqueId
+                    WHERE w.admin_id = ?
+                    ORDER BY w.created_at DESC, c.created_at DESC
+                """;
+
+        List<ClientListView> result = new ArrayList<>();
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, adminId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ClientListView view = new ClientListView();
+                    view.setClientId(rs.getString("client_id"));
+                    view.setClientName(rs.getString("client_name"));
+                    view.setWorkspaceName(rs.getString("workspace_name"));
+                    view.setIpAddress(rs.getString("last_ip_address"));
+                    view.setOsInfo(rs.getString("os_info"));
+                    view.setStatus(rs.getString("status"));
+                    view.setLastHeartbeat(
+                            rs.getTimestamp("last_heartbeat") != null
+                                    ? rs.getTimestamp("last_heartbeat").toLocalDateTime().toString()
+                                    : null
+                    );
+                    result.add(view);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public boolean deleteClientForAdmin(String clientId, String adminId) {
+
+        String sql = """
+                    DELETE c
+                    FROM clients c
+                    JOIN workspaces w ON c.workspace_id = w.uniqueId
+                    WHERE c.id = ? AND w.admin_id = ?
+                """;
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, clientId);
+            ps.setString(2, adminId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
 
     public List<Client> findAllByWorkspace(String workspaceId) {
         String sql = """

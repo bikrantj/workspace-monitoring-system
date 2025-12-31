@@ -56,7 +56,6 @@
                 <Button text="Dashboard"
                         onAction="#onDashboardClicked"
                         prefWidth="212" prefHeight="48"
-                        styleClass="sidebar-nav-button"
                         style="-fx-background-color: transparent;
                            -fx-text-fill: #64748b;
                            -fx-font-size: 15;
@@ -69,9 +68,10 @@
                 </Button>
 
                 <!-- Additional navigation items (repeat pattern) -->
-                <Button text="Users Management"
+                <Button text="Device Management"
+                        onAction="#onDeviceManagementClicked"
+
                         prefWidth="212" prefHeight="48"
-                        styleClass="sidebar-nav-button"
                         style="-fx-background-color: transparent;
                            -fx-text-fill: #64748b;
                            -fx-font-size: 15;
@@ -79,23 +79,11 @@
                            -fx-padding: 0 0 0 16;
                            -fx-cursor: hand;">
                     <graphic>
-                        <Label text="👥" style="-fx-font-size: 20; -fx-text-fill: #64748b; -fx-padding: 0 16 0 0;"/>
+                        <Label text="💻" style="-fx-font-size: 20; -fx-text-fill: #64748b; -fx-padding: 0 16 0 0;"/>
                     </graphic>
                 </Button>
 
-                <Button text="Settings"
-                        prefWidth="212" prefHeight="48"
-                        styleClass="sidebar-nav-button"
-                        style="-fx-background-color: transparent;
-                           -fx-text-fill: #64748b;
-                           -fx-font-size: 15;
-                           -fx-alignment: CENTER_LEFT;
-                           -fx-padding: 0 0 0 16;
-                           -fx-cursor: hand;">
-                    <graphic>
-                        <Label text="⚙️" style="-fx-font-size: 20; -fx-text-fill: #64748b; -fx-padding: 0 16 0 0;"/>
-                    </graphic>
-                </Button>
+
                 <Button text="Logout"
                         onMouseClicked="#onLogoutClicked"
                         prefWidth="212" prefHeight="48"

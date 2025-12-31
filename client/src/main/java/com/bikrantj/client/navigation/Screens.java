@@ -17,6 +17,7 @@ public enum Screens {
     DASHBOARD("/com/bikrantj/client/admin-dashboard.fxml"),
     DEVICE_LIST("/com/bikrantj/client/device-list.fxml"),
     DEVICE_DETAIL("/com/bikrantj/client/device-detail.fxml"),
+    DEVICE_MANAGEMENT("/com/bikrantj/client/device-management.fxml"),
     DEVICE_CARD("/com/bikrantj/client/device-card.fxml"),
     WORKSPACE("/com/bikrantj/client/workspace.fxml");
 

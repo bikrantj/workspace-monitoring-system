@@ -7,6 +7,7 @@ import com.bikrantj.shared.model.Screenshot;
 import com.bikrantj.shared.model.Workspace;
 import com.bikrantj.shared.requests.*;
 import com.bikrantj.shared.responses.ActivityPoint;
+import com.bikrantj.shared.responses.ClientListView;
 import com.bikrantj.shared.responses.HighRamProcessUsage;
 import com.bikrantj.shared.responses.LoginResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -108,6 +109,21 @@ public class ApiClient {
             e.printStackTrace();
             return List.of();
         }
+    }
+
+    public List<ClientListView> getAllAdminDevices() throws ApiException {
+        return http.getGeneric(
+                "/api/admin/devices",
+                new TypeReference<List<ClientListView>>() {
+                }
+        );
+    }
+
+    public void deleteAdminDevice(DeleteClientRequest request) throws ApiException {
+        http.post(
+                "/api/admin/device", request,
+                Void.class
+        );
     }
 
     public Screenshot getLatestSceenshot(String workspaceId, String clientId) {
